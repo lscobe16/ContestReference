@@ -2,8 +2,8 @@
 % To print this document, set all colors to black!
 \usepackage{xcolor}
 \definecolor{safeRed}{HTML}{D7191C}
-\definecolor{safeOrange}{HTML}{FFDE71}
-\definecolor{safeYellow}{HTML}{FFFFBF}
+\definecolor{safeOrange}{HTML}{FFA741}
+\definecolor{safeYellow}{HTML}{FFDE71}
 \definecolor{safeGreen}{HTML}{99CF8F}
 \definecolor{safeBlue}{HTML}{2B83BA}
 
@@ -44,7 +44,7 @@
 	commentstyle=\color{comment}\bfseries\itshape,
 	identifierstyle=\color{identifier},
 	directivestyle=\color{keyword}\bfseries,
-	emph={auto, int, long, long long, float, double, long double, char, bool, void, ll, ld, pt, lll, __int128, __float128, true, false, this, nullptr, INF, inf, EPS, eps},
+	emph={auto, int, long, long long, float, double, long double, char, bool, void, ll, ld, pt, lll, __int128, __float128, true, false, this, nullptr, INF, inf, EPS, eps, pair, vector, z},
 	emphstyle=\color{type}\bfseries,
 	frame=trbl,
 	aboveskip=3pt,
@@ -121,5 +121,28 @@
 }
 \makeatother
 
-\newcommand{\hl}[1]{\btHL[fill=safeOrange,draw=black,thin]{#1}}
+% floating boxes for notes
+\newcommand{\noteBox}[2]{\btHL[fill=#1,draw=black,thin]{#2}}
+\newcommand{\redBox}[1]{\noteBox{safeRed}{#1}}
+\newcommand{\orangeBox}[1]{\noteBox{safeOrange}{#1}}
+\newcommand{\yellowBox}[1]{\noteBox{safeYellow}{#1}}
+\newcommand{\greenBox}[1]{\noteBox{safeGreen}{#1}}
+\newcommand{\blueBox}[1]{\noteBox{safeBlue}{#1}}
+\newcommand{\hl}[1]{\orangeBox{#1}}
 
+% \reducedstrut is used so that colorboxes in successive lines dont merge into one blob
+\newcommand{\reducedstrut}{\vrule width 0pt height .9\ht\strutbox depth .9\dp\strutbox\relax}
+
+% highlighting source code
+% since listing's syntax highlighting is not contextsensitive, you can use this anywhere in the source code
+\newcommand{\highlight}[2]{%
+  \begingroup%
+  \setlength{\fboxsep}{0pt}%  
+  \colorbox{#1}{\reducedstrut#2\/}%
+  \endgroup%
+}
+\newcommand{\red}[1]{\highlight{safeRed}{#1}}
+\newcommand{\orange}[1]{\highlight{safeOrange}{#1}}
+\newcommand{\yellow}[1]{\highlight{safeYellow}{#1}}
+\newcommand{\green}[1]{\highlight{safeGreen}{#1}}
+\newcommand{\blue}[1]{\highlight{safeBlue}{#1}}
