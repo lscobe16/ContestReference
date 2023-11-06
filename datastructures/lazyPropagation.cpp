@@ -1,3 +1,4 @@
+// TODO: Use own persistent implicit SegTree instead
 template<typename T = ll, typename U = ll>
 struct SegTree {
 	int size, height;
