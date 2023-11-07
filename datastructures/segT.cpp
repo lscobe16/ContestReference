@@ -15,7 +15,7 @@ struct segT {
         U lazy;
     };    @\yellowBox{persistent}\greenBox{not persistent}@
     @\green{vector<node> v = {{0, 0, e, id}};}@
-    @\yellow{shared_ptr<vector<node>> v{new vector<node>({0, 0, e, id})};}@
+    @\yellow{shared_ptr<vector<node>> v{new vector<node>{{0, 0, e, id}}};}@
     //Array wegen Speicher (int32_t < node*). Is that worth it??? // Linus: probably this is also faster because of caching
     //shared_ptr: bei vielen Updates/SegTs ist es wichtig, dass der Speicher für v wieder freigegeben wird
 @\yellow{#define v (*v)}@
