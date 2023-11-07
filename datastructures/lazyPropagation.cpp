@@ -18,7 +18,7 @@ struct segT {
     @\orange{shared_ptr<vector<node>> v{new vector<node>({0, 0, e, id})};}@ 
     //Array wegen Speicher (int32_t < node*). Is that worth it??? // Linus: probably this is also faster because of caching
     //shared_ptr: bei vielen Updates/SegTs ist es wichtig, dass der Speicher für v wieder freigegeben wird
-@\orange{#define# v (*v)}@
+@\orange{#define v (*v)}@
 #define N v[n]
     z root = 0;
 
