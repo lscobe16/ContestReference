@@ -13,7 +13,7 @@ struct segT {
         int32_t l, r;
         A agg; //or value (for leaves)
         U lazy;
-    };    @\yellowBox{persistent}\greenBox{not persistent}@
+    };    @\greenBox{not persistent}@ @\yellowBox{persistent}@
     @\green{vector<node> v = {{0, 0, e, id}};}@
     @\yellow{shared_ptr<vector<node>> v{new vector<node>{{0, 0, e, id}}};}@
     //Array wegen Speicher (int32_t < node*). Is that worth it??? // Linus: probably this is also faster because of caching
