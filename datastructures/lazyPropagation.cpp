@@ -13,17 +13,17 @@ struct segT {
         int32_t l, r;
         A agg; //or value (for leaves)
         U lazy;
-    };    @\orangeBox{persistent}\yellowBox{not persistent}@
-    @\yellow{vector<node> v={{0, 0, e, id}};}@
-    @\orange{shared_ptr<vector<node>> v{new vector<node>({0, 0, e, id})};}@ 
+    };    @\yellowBox{persistent}\greenBox{not persistent}@
+    @\green{vector<node> v = {{0, 0, e, id}};}@
+    @\yellow{shared_ptr<vector<node>> v{new vector<node>({0, 0, e, id})};}@
     //Array wegen Speicher (int32_t < node*). Is that worth it??? // Linus: probably this is also faster because of caching
     //shared_ptr: bei vielen Updates/SegTs ist es wichtig, dass der Speicher für v wieder freigegeben wird
-@\orange{#define v (*v)}@
+@\yellow{#define v (*v)}@
 #define N v[n]
     z root = 0;
 
     z set(z n, node x) {
-        return @\yellow{n ? v[n]=x, n : }@(v.push_back(x), v.size()-1);
+        return @\green{n ? v[n]=x, n : }@(v.push_back(x), v.size()-1);
     }
     z apply(z n, U u, z rangesize) {
         return set(n, {N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
@@ -45,7 +45,8 @@ struct segT {
         return app(aggr(la, ra), N.lazy, min(bex, rex) - max(a, l));
     }
 
-    z lower_bound(z a, z bex, z l, z rex, z n, A &cur_agg, U lazy, function<bool(A&)> &p@\opt{, bool rtl}@) { @\optAnn@
+    z lower_bound(z a, z bex, z l, z rex, z n, @\optAnn@
+           A &cur_agg, U lazy, function<bool(A&)> &p@\opt{, bool rtl}@) {
         if(bex <= l || rex <= a) return -2; //todo: bei Link anders -- passt das so (immer)? Chris fragen!?
         A n_agg = app(N.agg, lazy, rex - l);
         A new_agg = @\opt{rtl ? aggr(n_agg, cur_agg) : }@aggr(cur_agg, n_agg);
@@ -59,12 +60,12 @@ struct segT {
         return lower_bound(a, bex, @\opt{rtl?l:}@m, @\opt{rtl?m:}@rex, @\opt{rtl?N.l:}@N.r, cur_agg, lazy, p, rtl);
     }
 #undef N
-@\orange{#undef v}@
+@\yellow{#undef v}@
 
-    @\yellow{void}\orange{segT}@ update(z l, z rex, U u) {
+    @\green{void}\yellow{segT}@ update(z l, z rex, U u) {
         @\opt{assert(0 <= l && l <= rex && rex <= sz);}@
-        @\yellow{this->root = update(l, rex, 0, sz, root, u);}@
-        @\orange{return segT{sz, e, id, v, update(l, rex, 0, sz, root, u)};}@
+        @\green{this->root = update(l, rex, 0, sz, root, u);}@
+        @\yellow{return segT{sz, e, id, v, update(l, rex, 0, sz, root, u)};}@
     }
 
     A query(z l, z rex) {
@@ -72,7 +73,8 @@ struct segT {
         return query(l, rex, 0, sz, root);
     }
 
-    z lower_bound(z l, z rex, function<bool(A&)> p@\opt{, bool rtl = false}@) { @\optAnn@
+    z lower_bound(z l, z rex, @\optAnn@
+            function<bool(A&)> p @\opt{, bool rtl = false}@) {
         @\opt{assert(0 <= l && l <= rex && rex <= sz);}@
         if(p(e)) return @\opt{rtl?rex:}@l;
         if(l==rex) return -1;
