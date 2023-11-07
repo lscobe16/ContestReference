@@ -7,6 +7,7 @@
 \definecolor{safeGreen}{HTML}{99CF8F}
 \definecolor{safeBlue}{HTML}{2B83BA}
 \definecolor{gray}{HTML}{999999}
+\definecolor{bgGray}{HTML}{CCCCCC}
 
 %try printer friendly colors?
 %\colorlet{keyword}{safeBlue}
@@ -129,9 +130,11 @@
 \newcommand{\yellowBox}[1]{\noteBox{safeYellow}{#1}}
 \newcommand{\greenBox}[1]{\noteBox{safeGreen}{#1}}
 \newcommand{\blueBox}[1]{\noteBox{safeBlue}{#1}}
+\newcommand{\grayBox}[1]{\noteBox{bgGray}{#1}}
 
 \newcommand{\hl}[1]{\yellowBox{#1}}
 \newcommand{\opt}[1]{\color{gray}{#1}}
+\newcommand{\optAnn}{\grayBox{optional}}
 
 % \reducedstrut is used so that colorboxes in successive lines dont merge into one blob
 \newcommand{\reducedstrut}{\vrule width 0pt height .9\ht\strutbox depth .9\dp\strutbox\relax}
