@@ -1,21 +1,16 @@
 \section{Datenstrukturen}
 
 \begin{algorithm}{Iterative Segment Tree}
-	\begin{methods}
-		\method{init}{baut den Baum auf}{n}
-		\method{query}{findet das agg in [l, r)}{\log(n)}
-		\method{update}{ändert einen Wert}{\log(n)}
-	\end{methods}
 	\sourcecode{datastructures/segmentTree.cpp}
 	
 	\subsubsection{Mighty Segment Tree}
 	Range updates, Range queries, implicit, ggf. persistent \\
 	\method{lower\_bound}{}{\log(n)}
 	Left to right:\\
-	\tab smallest kex in [l, rex] such that p(agg([l, kex))), or -1 if impossible\\
+	\tab smallest kex in [l, rex] such that p(agg([l, kex))), sth <0 if impossible\\
 	\tab p should be increasing, i.e.  p(a1) <= p(agg(a1, a2))\\
 	Right to left:\\
-	\tab largest k in [l, rex] such that p(agg([k, rex))), or -1 if impossible\\
+	\tab largest k in [l, rex] such that p(agg([k, rex))), or sth <0 if impossible\\
 	\tab p should be decreasing, i.e.  p(agg(a1, a2)) <= p(a2)
 	\sourcecode{datastructures/lazyPropagation.cpp}
 \end{algorithm}
