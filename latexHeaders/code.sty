@@ -1,11 +1,11 @@
 % Colors, used for syntax highlighting.
 % To print this document, set all colors to black!
 \usepackage{xcolor}
-\definecolor{safeRed}{HTML}{D7191C}
-\definecolor{safeOrange}{HTML}{FFA741}
+\definecolor{safeRed}{HTML}{FF7272}
+\definecolor{safeOrange}{HTML}{FFBB6D}
 \definecolor{safeYellow}{HTML}{FFDE71}
 \definecolor{safeGreen}{HTML}{99CF8F}
-\definecolor{safeBlue}{HTML}{2B83BA}
+\definecolor{safeBlue}{HTML}{5CAEE1}
 \definecolor{gray}{HTML}{999999}
 \definecolor{bgGray}{HTML}{CCCCCC}
 
@@ -124,7 +124,7 @@
 \makeatother
 
 % floating boxes for notes
-\newcommand{\noteBox}[2]{\btHL[fill=#1,draw=black,thin]{#2}}
+\newcommand{\noteBox}[2]{\btHL[fill=#1,draw=black,thin]{#2}\hspace{1em}}
 \newcommand{\redBox}[1]{\noteBox{safeRed}{#1}}
 \newcommand{\orangeBox}[1]{\noteBox{safeOrange}{#1}}
 \newcommand{\yellowBox}[1]{\noteBox{safeYellow}{#1}}
@@ -132,19 +132,17 @@
 \newcommand{\blueBox}[1]{\noteBox{safeBlue}{#1}}
 \newcommand{\grayBox}[1]{\noteBox{bgGray}{#1}}
 
-\newcommand{\hl}[1]{\yellowBox{#1}}
-\newcommand{\opt}[1]{\color{gray}{#1}}
-\newcommand{\optAnn}{\grayBox{optional}}
-
 % \reducedstrut is used so that colorboxes in successive lines dont merge into one blob
 \newcommand{\reducedstrut}{\vrule width 0pt height .9\ht\strutbox depth .9\dp\strutbox\relax}
 
 % highlighting source code
+\DisableLigatures{encoding = *, family = tt* }
+\newcommand{\cpp}[1]{{\ttfamily\normalsize\detokenize{#1}}} % problem: for some reason using this duplicates #s
 % since listing's syntax highlighting is not contextsensitive, you can use this anywhere in the source code
 \newcommand{\highlight}[2]{%
   \begingroup%
   \setlength{\fboxsep}{0pt}%  
-  \colorbox{#1}{\reducedstrut#2\/}%
+  \colorbox{#1}{\reducedstrut\cpp{#2}\/}%
   \endgroup%
 }
 \newcommand{\red}[1]{\highlight{safeRed}{#1}}
@@ -152,3 +150,9 @@
 \newcommand{\yellow}[1]{\highlight{safeYellow}{#1}}
 \newcommand{\green}[1]{\highlight{safeGreen}{#1}}
 \newcommand{\blue}[1]{\highlight{safeBlue}{#1}}
+
+% semantic commands
+\newcommand{\hl}[1]{\yellowBox{#1}}
+\newcommand{\opt}[1]{\color{gray}{\cpp{#1}}}
+\newcommand{\optAnn}{\grayBox{optional}}
+\newcommand{\warn}[1]{\redBox{#1}}
