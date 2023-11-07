@@ -1,17 +1,22 @@
 \section{Datenstrukturen}
 
-\begin{algorithm}{Segmentbaum}
+\begin{algorithm}{Iterative Segment Tree}
 	\begin{methods}
 		\method{init}{baut den Baum auf}{n}
-		\method{query}{findet das min(max) in [l, r)}{\log(n)}
+		\method{query}{findet das agg in [l, r)}{\log(n)}
 		\method{update}{ändert einen Wert}{\log(n)}
 	\end{methods}
 	\sourcecode{datastructures/segmentTree.cpp}
 	
-	\subsubsection{Lazy Propagation}
-	%TODO: update! (esp. binary search)
-	Assignment modifications, sum queries \\
-	\method{lower\_bound}{erster Index in [l, r) $\geq$ x (erfordert max-combine)}{\log(n)}
+	\subsubsection{Mighty Segment Tree}
+	Range updates, Range queries, implicit, ggf. persistent \\
+	\method{lower\_bound}{}{\log(n)}
+	Left to right:\\
+	\tab smallest kex in [l, rex] such that p(agg([l, kex))), or -1 if impossible\\
+	\tab p should be increasing, i.e.  p(a1) <= p(agg(a1, a2))\\
+	Right to left:\\
+	\tab largest k in [l, rex] such that p(agg([k, rex))), or -1 if impossible\\
+	\tab p should be decreasing, i.e.  p(agg(a1, a2)) <= p(a2)
 	\sourcecode{datastructures/lazyPropagation.cpp}
 \end{algorithm}
 
@@ -30,7 +35,7 @@
 	\end{methods}
 	\sourcecode{datastructures/fenwickTree2.cpp}
 \end{algorithm}
-\clearpage
+% \clearpage
 
 \begin{algorithm}{STL-Rope (Implicit Cartesian Tree)}
 	\sourcecode{datastructures/stlRope.cpp}

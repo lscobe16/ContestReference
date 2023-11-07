@@ -1,8 +1,8 @@
 struct segT {
     z sz; @\warn{always initialize!}@
 
-    using A=z;
-    using U=z;
+    using A = z;
+    using U = z;
     A e = 0;
     U id = 0;
     A aggr(A a, A b) {return a+b;}
@@ -45,18 +45,18 @@ struct segT {
         return app(aggr(la, ra), N.lazy, min(bex, rex) - max(a, l));
     }
 
-    z bin_search(z a, z bex, z l, z rex, z n, A &cur_agg, U lazy, function<bool(A&)> &p@\opt{, bool rtl}@) { @\optAnn@
-        if(bex <= l || rex <= a) return -1; //todo: bei Link anders -- passt das so (immer)? Chris fragen!?
+    z lower_bound(z a, z bex, z l, z rex, z n, A &cur_agg, U lazy, function<bool(A&)> &p@\opt{, bool rtl}@) { @\optAnn@
+        if(bex <= l || rex <= a) return -2; //todo: bei Link anders -- passt das so (immer)? Chris fragen!?
         A n_agg = app(N.agg, lazy, rex - l);
         A new_agg = @\opt{rtl ? aggr(n_agg, cur_agg) : }@aggr(cur_agg, n_agg);
-        if (a <= l && rex <= bex && !p(new_agg)) return cur_agg = new_agg, -1;
+        if (a <= l && rex <= bex && !p(new_agg)) return cur_agg = new_agg, -2;
         if (l + 1 == rex) return l;
 
         //push(n, rex - l); //might need to much memory if more queries than updates allowed
         z m = (l + rex) / 2;
-        z res = bin_search(a, bex, @\opt{rtl?m:}@l, @\opt{rtl?rex:}@m, @\opt{rtl?N.r:}@N.l, cur_agg, lazy = comp(lazy, N.lazy), p, rtl);
-        if (res != -1) return res;
-        return bin_search(a, bex, @\opt{rtl?l:}@m, @\opt{rtl?m:}@rex, @\opt{rtl?N.l:}@N.r, cur_agg, lazy, p, rtl);
+        z res = lower_bound(a, bex, @\opt{rtl?m:}@l, @\opt{rtl?rex:}@m, @\opt{rtl?N.r:}@N.l, cur_agg, lazy = comp(lazy, N.lazy), p, rtl);
+        if (res != -2) return res;
+        return lower_bound(a, bex, @\opt{rtl?l:}@m, @\opt{rtl?m:}@rex, @\opt{rtl?N.l:}@N.r, cur_agg, lazy, p, rtl);
     }
 #undef N
 @\orange{#undef v}@
@@ -72,17 +72,11 @@ struct segT {
         return query(l, rex, 0, sz, root);
     }
 
-    //todo: unschön (siehe auch treap): wenn schon p(neutralE), wird l zurückgegeben
-    //left_to_right:
-    //  returns smallest k in [l, rex) so that p(agg(a_l, ..., a_k)), or -1 if impossible
-    //  p should be increasing, i.e.  p(a1) not less than p(agg(a1, a2))
-    //right_to_left:
-    //  returns largest k in [l, rex) so that p(agg(a_k, ..., a_rex-1)), or -1 if impossible
-    //  p should be decreasing, i.e.  p(a1) not greater than p(agg(a1, a2))
-    z bin_search(z l, z rex, function<bool(A&)> p@\opt{, bool right_to_left = false}@) { @\optAnn@
+    z lower_bound(z l, z rex, function<bool(A&)> p@\opt{, bool rtl = false}@) { @\optAnn@
         @\opt{assert(0 <= l && l <= rex && rex <= sz);}@
+        if(p(e)) return @\opt{rtl?rex:}@l;
         if(l==rex) return -1;
         A curr_agg = e;
-        return bin_search(l, rex, 0, sz, root, curr_agg, id, p@\opt{, right_to_left}@);
+        return lower_bound(l, rex, 0, sz, root, curr_agg, id, p@\opt{, rtl}@) + @\opt{rtl?0:}@1;
     }
 };
