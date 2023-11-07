@@ -13,7 +13,7 @@ struct iterSegT {
             v[i] = agg(v[2 * i], v[2 * i + 1]);
     }
 
-    @\yellow{Point updates, Range queries}@
+    @\yellowBox{Point updates, Range queries}@
     void set(z i, A a) {
         v[i += n] = a;
         while (i /= 2)
@@ -29,7 +29,7 @@ struct iterSegT {
         return agg(la, ra);
     }
 
-    @\green{Range updates, Point queries}@
+    @\greenBox{Range updates, Point queries}@
     void update(z l, z rex, A a) {
         for (l += n, rex += n; l < rex; l /= 2, rex /= 2) {
             if (l&1) {v[l] = agg(v[l], a), l++;}
