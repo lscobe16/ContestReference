@@ -78,10 +78,10 @@ struct segT {
     //right_to_left:
     //  returns largest k in [l, rex) so that p(agg(a_k, ..., a_rex-1)), or -1 if impossible
     //  p should be decreasing, i.e.  p(a1) not greater than p(agg(a1, a2))
-    z bin_search(z l, z rex, function<bool(A&)> p, bool right_to_left = false) { @\optAnn@
+    z bin_search(z l, z rex, function<bool(A&)> p@\opt{, bool right\_to\_left = false}@) { @\optAnn@
         @\opt{assert(0 <= l \&\& l <= rex \&\& rex <= sz);}@
         if(l==rex) return -1;
         A curr_agg = e;
-        return bin_search(l, rex, 0, sz, root, curr_agg, id, p, right_to_left);
+        return bin_search(l, rex, 0, sz, root, curr_agg, id, p@\opt{, right\_to\_left}@);
     }
 };
