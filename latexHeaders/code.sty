@@ -142,17 +142,23 @@
 \newcommand{\highlight}[2]{%
   \begingroup%
   \setlength{\fboxsep}{0pt}%  
-  \colorbox{#1}{\reducedstrut\cpp{#2}\/}%
+  \colorbox{#1}{\reducedstrut#2\/}%
   \endgroup%
 }
-\newcommand{\red}[1]{\highlight{safeRed}{#1}}
-\newcommand{\orange}[1]{\highlight{safeOrange}{#1}}
-\newcommand{\yellow}[1]{\highlight{safeYellow}{#1}}
-\newcommand{\green}[1]{\highlight{safeGreen}{#1}}
-\newcommand{\blue}[1]{\highlight{safeBlue}{#1}}
+\newcommand{\red}[1]{\highlight{safeRed}{\cpp{#1}}}
+\newcommand{\orange}[1]{\highlight{safeOrange}{\cpp{#1}}}
+\newcommand{\yellow}[1]{\highlight{safeYellow}{\cpp{#1}}}
+\newcommand{\green}[1]{\highlight{safeGreen}{\cpp{#1}}}
+\newcommand{\blue}[1]{\highlight{safeBlue}{\cpp{#1}}}
+\newcommand{\redE}[1]{\highlight{safeRed}{#1}}
+\newcommand{\orangeE}[1]{\highlight{safeOrange}{#1}}
+\newcommand{\yellowE}[1]{\highlight{safeYellow}{#1}}
+\newcommand{\greenE}[1]{\highlight{safeGreen}{#1}}
+\newcommand{\blueE}[1]{\highlight{safeBlue}{#1}}
 
 % semantic commands
 \newcommand{\hl}[1]{\yellowBox{#1}}
 \newcommand{\opt}[1]{\color{gray}{\cpp{#1}}}
+\newcommand{\optE}[1]{\color{gray}{#1}}
 \newcommand{\optAnn}{\grayBox{optional}}
 \newcommand{\warn}[1]{\redBox{#1}}
