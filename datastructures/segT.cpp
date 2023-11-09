@@ -21,7 +21,7 @@ struct segT {
     z root = 0;
 
     z set(z n, node x) {
-        return @\green{n ? v[n]=x, n : }@(v.push_back(x), v.size()-1);
+        return @\green{n ? v[n]=x, n : }\red(@v.push_back(x), v.size()-1@\red)@;
     }
     z apply(z n, U u, z rangesize) {
         return set(n, {N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
