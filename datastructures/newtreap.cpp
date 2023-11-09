@@ -82,3 +82,19 @@ T merge(T l, T r) {
 
 A e = 0; @\redBox{Check that t!=0 before accessing t->agg!}@
 A auto agg(T t) {return t ? t->agg : e;}
+
+T extract(T& t, au a, au b, bool bin = 0) {
+    // for other T manipulations, copy this, ...
+    au [tl, _] = split(t, a);
+    au [tm, tr] = split(_, b, bin);
+    // ...manipulate tm here...
+    t = merge(merge(tl, 0), tr); // ...and replace 0 with tm
+    return tm;
+}
+
+void insert(T& t, T o, au b, bool after = 0) {
+    au [tl, _] = split(t, b, after);
+    au [tm, tr] = split(_, b, after);
+    tm = o;
+    t = merge(merge(tl, tm), tr);
+}
