@@ -1,9 +1,9 @@
 \section{Datenstrukturen}
 
 \begin{algorithm}{Iterative Segment Tree}
-	\sourcecode{datastructures/iterSegT.cpp}
+	\sourcecode{datastructures/iterSegT.cpp}	
 \end{algorithm}
-	
+
 \begin{algorithm}{Mighty Segment Tree}
 	Range updates, Range queries, implicit, ggf. persistent \\
 	\method{lower\_bound}{}{\log(n)}
@@ -94,7 +94,12 @@
 \end{algorithm}
 
 \begin{algorithm}{Lower/Upper Envelope (Convex Hull Optimization)}
-	Um aus einem lower envelope einen upper envelope zu machen (oder umgekehrt), einfach beim Einfügen der Geraden $m$ und $b$ negieren.
+	Hier nur für lower envelopes.
+	Um aus einem lower envelope einen upper envelope zu machen (oder umgekehrt), einfach beim Einfügen der Geraden $m$ und $b$ negieren.\\
+	\begin{methods}
+		\method[amort. $\O{1}$ bzw. amort. $\O{\log(n)}$]{add}{$M := M \cup \{x \mapsto mx+b\}$}{}
+		\method[amort. $\O{1}$ bzw. $\O{\log(n)}$]{query}{$\min \{f(x) \mid f \in M\}$}{}
+	\end{methods}
 	\sourcecode{datastructures/monotonicConvexHull.cpp}
 	\columnbreak
 	\sourcecode{datastructures/dynamicConvexHull.cpp}

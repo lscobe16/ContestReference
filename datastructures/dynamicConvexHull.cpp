@@ -1,3 +1,4 @@
+@\yellowBox{general}@
 struct Line {
 	mutable ll m, b, p;
 	bool operator<(const Line& o) const {return m < o.m;}
@@ -5,7 +6,7 @@ struct Line {
 };
 
 struct HullDynamic : multiset<Line, less<>> {
-	// (for doubles, use inf = 1/.0, div(a,b) = a/b)
+	// round to -inf (for doubles, use inf = 1/.0, div(a,b) = a/b)
 	ll div(ll a, ll b) {return a / b - ((a ^ b) < 0 && a % b);}
 
 	bool isect(iterator x, iterator y) {
