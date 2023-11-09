@@ -1,8 +1,6 @@
-//Options: agg(+lazy update) (+rev) OR key
-
 z sz(auto t) {return t ? t->s : 0;}
 
-@\yellow{using K = z;}@ // key
+@\yellow{using K = z;}@
 using A = z;
 A aggr(A a, A b) {return a+b;}
 @\green{using U = z;}@
@@ -21,23 +19,20 @@ struct treap {
     treap *l = 0, *r = 0;
     z s = 1;
 
-    @\green{void push()}\\@
+    @\greenE{void push() \{}\\@
         @\green{for(auto c : {l, r})}\\@
             @\green{if(c) c->apply(lazy), c->lazy_rev ^= lazy_rev;}\\@
         @\green{lazy = id;}\\@
         @\blue{if(lazy_rev) swap(l, r), lazy_rev = 0;}\\@
-    @\green{}@
+    @\greenE\}@
 
-    void update(){ // call after changing a or (the pointers) l or r
+    void update() { // call after changing a or (the pointers) l or r
         s = sz(l) + sz(r) + 1;
         agg = a;
         if(l) agg = aggr(l->agg, agg);
         if(r) agg = aggr(agg, r->agg);
     }
-    void seta(A _a) {
-        a = _a;
-        update();
-    }
+    void seta(A _a) { a = _a; update(); }
 
     void apply(U u) { // apply update on range
         a = app(a, u, 1);
@@ -53,8 +48,8 @@ T pair<T, T> split(T t, B b, bool after = false) { //default after = false for o
     if(!t) return {t, t};
     @\green{t->push();}@
     if(b + after <= sz(t->l) || (b -= sz(t->l) + 1, 0)) {
-    @\yellowBox{MAY be used instead of the line above IF using keys:}\\@
-    @\yellow{if(after ? b < t->k : !(t->k < b)) }@
+    @\yellowBox{you MAY instead split at keys:}\\@
+    @\yellow{if(after ? b < t->k : !(t->k < b)) }\yellowE\{@
         auto [l, r] = split(t->l, b, after);
         t->l = r;
         if(l) t->update();
@@ -85,5 +80,5 @@ T merge(T l, T r) {
     }
 }
 
-@\red{A e = 0;}@
-@\red{A auto agg(T t) {return t ? t->agg : e;}}@
+A e = 0; @\redBox{Check that t!=0 before accessing t->agg!}@
+A auto agg(T t) {return t ? t->agg : e;}
