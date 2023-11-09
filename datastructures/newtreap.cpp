@@ -1,5 +1,3 @@
-z sz(auto t) {return t ? t->s : 0;}
-
 @\yellow{using K = z;}@
 using A = z;
 A aggr(A a, A b) {return a+b;}
@@ -8,60 +6,61 @@ A aggr(A a, A b) {return a+b;}
 @\green{A app(A a, U u, z s) {return a+u*s;}}@
 @\green{U comp(U later, U first) {return later+first;}}@
 
+z sz(au t) {return t ? t->s : 0;}
+
 struct treap {
-    @\yellow{K k;}@
-    A a;
+    @\yellow{K k;} \redBox{always initialize!}@
+    A a; @\redBox{always initialize!}@
     A agg = a;
     @\green{U lazy = id;}@ // only for children
-    @\blue{z lazy_rev = 0;}@ // only use on "implicit"/non-key treaps with commutative aggr
+    @\blue{z lazy_rev = 0;}@
 
-    z prio = rand();
+    z prio = rand() ^ rand(), s = 1;
     treap *l = 0, *r = 0;
-    z s = 1;
 
-    @\greenE{void push() \{}\\@
-        @\green{for(auto c : {l, r})}\\@
-            @\green{if(c) c->apply(lazy), c->lazy_rev ^= lazy_rev;}\\@
-        @\green{lazy = id;}\\@
-        @\blue{if(lazy_rev) swap(l, r), lazy_rev = 0;}\\@
-    @\greenE\}@
-
-    void update() { // call after changing a or (the pointers) l or r
+    void update() { // @\red{always}@ call after changing a, l or r
         s = sz(l) + sz(r) + 1;
         agg = a;
         if(l) agg = aggr(l->agg, agg);
         if(r) agg = aggr(agg, r->agg);
     }
-    void seta(A _a) { a = _a; update(); }
+    void seta(A _a) {a = _a; update();}
 
-    void apply(U u) { // apply update on range
-        a = app(a, u, 1);
-        agg = app(agg, u, s);
-        @\green{lazy = comp(u, lazy);}@
-    }
-    @\blue{void rev() { lazy_rev ^= 1; }}@
+    @\greenE{void push() \{}@ // @\red{always}@ call before visiting/changing l or r
+    @\greenE\Quad\green{for(au c : {l, r})}@
+    @\greenE{\Quad\Quad}\green{if(c) c->apply(lazy)}\red,\green{ c->lazy_rev ^= lazy_rev;}@
+    @\greenE\Quad\green{lazy = id;}@
+    @\greenE\Quad\blue{if(lazy_rev) swap(l, r)}\red,\blue{ lazy_rev = 0;}@
+    @\greenE\}@
+
+    @\greenE{void apply(U u) \{}@ // apply update on range
+    @\greenE{\Quad a = app(a, u, 1);}@
+    @\greenE{\Quad agg = app(agg, u, s);}@
+    @\greenE{\Quad lazy = comp(u, lazy);}@
+    @\greenE\}@
+
+    @\blue{void rev() {lazy_rev ^= 1;}}@
 };
 
 using T = treap*;
 
-T pair<T, T> split(T t, B b, bool after = false) { //default after = false for on, onr
+T pair<T, T> split(T t, B b, bool before = true) {
     if(!t) return {t, t};
     @\green{t->push();}@
-    if(b + after <= sz(t->l) || (b -= sz(t->l) + 1, 0)) {
+    if(b-before < sz(t->l) || (b -= sz(t->l) + 1, 0)) {
     @\yellowBox{you MAY instead split at keys:}\\@
-    @\yellow{if(after ? b < t->k : !(t->k < b)) }\yellowE\{@
-        auto [l, r] = split(t->l, b, after);
+    @\yellow{if(before ? !(t->k < b) : b < t->k) }\yellowE\{@
+        au [l, r] = split(t->l, b, before);
         t->l = r;
         if(l) t->update();
         return {l, t};
     }
     else {
-        auto [l, r] = split(t->r, b, after);
+        au [l, r] = split(t->r, b, before);
         t->r = l;
         if(r) t->update();
         return {t, r};
-    }
-}
+    }}
 
 T merge(T l, T r) {
     if (!l) return r;
@@ -77,24 +76,23 @@ T merge(T l, T r) {
         r->l = merge(l, r->l);
         r->update();
         return r;
-    }
-}
+    }}
 
-A e = 0; @\redBox{Check that t!=0 before accessing t->agg!}@
-A auto agg(T t) {return t ? t->agg : e;}
+@\redBox{Check that t!=0 before accessing t->agg!:}@
+@\opt{A agg(T t) {return t ? t->agg : __insert_neutral_A__;}}@
 
-T extract(T& t, au a, au b, bool bin = 0) {
-    // for other T manipulations, copy this, ...
+T extract(T& t, au a, au b, bool bex = true) {
+    // for other stuff on ranges of T, copy this, ...
     au [tl, _] = split(t, a);
-    au [tm, tr] = split(_, b, bin);
-    // ...manipulate tm here...
-    t = merge(merge(tl, 0), tr); // ...and replace 0 with tm
+    au [tm, tr] = split(_, b, bex);
+    // ...do stuff with tl/tm/tr here...
+    t = merge(merge(tl, 0), tr); // ...and replace this 0 with tm
     return tm;
 }
 
-void insert(T& t, T o, au b, bool after = 0) {
-    au [tl, _] = split(t, b, after);
-    au [tm, tr] = split(_, b, after);
+void insert(T& t, T o, au b, bool before = true) {
+    au [tl, _] = split(t, b, before);
+    au [tm, tr] = split(_, b, before);
     tm = o;
     t = merge(merge(tl, tm), tr);
 }
