@@ -1,18 +1,18 @@
 \section{Graphen}
 
-\begin{algorithm}{Eulertouren}
+\begin{algorithm}{Eulerkreis}
 	\begin{methods}
-		\method{euler}{berechnet den Kreis}{\abs{V}+\abs{E}}
+		\method{euler}{berechnet den Kreis als Knotenarray}{\abs{V}+\abs{E}}
 	\end{methods}
-	\sourcecode{graph/euler.cpp}
 	\begin{itemize}
-		\item Zyklus existiert, wenn jeder Knoten geraden Grad hat (ungerichtet),\\ bei jedem Knoten Ein- und Ausgangsgrad übereinstimmen (gerichtet).
-		\item Pfad existiert, wenn genau $\{0, 2\}$ Knoten ungeraden Grad haben (ungerichtet),\\ bei allen Knoten Ein- und Ausgangsgrad übereinstimmen oder einer eine Ausgangskante mehr hat (Startknoten) und einer eine Eingangskante mehr hat (Endknoten).
+		\item Eulerkreis existiert, wenn jeder Knoten geraden Grad hat (ungerichtet),\\ bei jedem Knoten Ein- und Ausgangsgrad übereinstimmen (gerichtet).
+		\item Eulerpfad existiert, wenn genau $\{0, 2\}$ Knoten ungeraden Grad haben (ungerichtet), bei allen Knoten Ein- und Ausgangsgrad übereinstimmen oder einer eine Ausgangskante mehr hat (Startknoten) und einer eine Eingangskante mehr hat (Endknoten).
 		\item \textbf{Je nach Aufgabenstellung überprüfen, wie ein unzusammenhängender Graph interpretiert werden sollen.}
 		\item Wenn eine bestimmte Sortierung verlangt wird oder Laufzeit vernachlässigbar ist, ist eine Implementierung mit einem \code{vector<set<int>> adj} leichter
 		\item \textbf{Wichtig:} Algorithmus schlägt nicht fehl, falls kein Eulerzyklus existiert.
 		Die Existenz muss separat geprüft werden.
 	\end{itemize}
+	\sourcecode{graph/euler.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Lowest Common Ancestor}
@@ -44,7 +44,7 @@
 
 \begin{algorithm}{Baum-Isomorphie}
 	\begin{methods}
-		\method{treeLabel}{berechnet kanonischen Namen für einen Baum}{\abs{V}\*\log(\abs{V})}
+		\method{treeLabel}{berechnet kanonischen Namen für einen gewurzelten Baum}{\abs{V}\*\log(\abs{V})}
 	\end{methods}
 	\sourcecode{graph/treeIsomorphism.cpp}
 \end{algorithm}
