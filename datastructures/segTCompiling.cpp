@@ -80,4 +80,4 @@ struct segT {
         if(l==rex) return -1;
         A curr_agg = e;
         return lower_bound(l, rex, 0, sz, root, curr_agg, id, p, rtl) + !rtl;
-    }};
+}};

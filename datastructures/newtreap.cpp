@@ -60,7 +60,7 @@ T pair<T, T> split(T t, B b, bool before = true) {
         t->r = l;
         if(r) t->update();
         return {t, r};
-    }}
+}}
 
 T merge(T l, T r) {
     if (!l) return r;
@@ -76,7 +76,7 @@ T merge(T l, T r) {
         r->l = merge(l, r->l);
         r->update();
         return r;
-    }}
+}}
 
 @\redBox{Check that t!=0 before accessing t->agg!:}@
 @\opt{A agg(T t) {return t ? t->agg : __insert_neutral_A__;}}@
