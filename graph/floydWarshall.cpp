@@ -1,5 +1,5 @@
-vector<vector<ll>> dist; // Entfernung zwischen je zwei Punkten.
-vector<vector<int>> pre;
+vector<vector<ll>> dist; // Entfernung zwischen je zwei Punkten
+vector<vector<int>> pre; // pre[to][from] = predecessor of to
 
 void floydWarshall() {
 	pre.assign(sz(dist), vector<int>(sz(dist), -1));
@@ -16,11 +16,3 @@ void floydWarshall() {
 					dist[i][j] = dist[i][k] + dist[k][j];
 					pre[i][j] = pre[i][k];
 }}}}}
-
-vector<int> getPath(int u, int v) {
-	//return dist[u][v]; // Pfadlänge u -> v
-	if (pre[u][v] < 0) return {};
-	vector<int> path = {v};
-	while (u != v) path.push_back(u = pre[u][v]);
-	return path; //Pfad u -> v
-}
