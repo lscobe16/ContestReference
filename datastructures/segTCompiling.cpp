@@ -40,7 +40,8 @@ struct segT {
         if(a <= l && rex <= bex) return N.agg;
         //push(n, rex - l); //might need to much memory if more queries than updates allowed
         z m = (l + rex) / 2;
-        A la = query(a, bex, l, m, N.l), ra = query(a, bex, m, rex, N.r);
+        A la = query(a, bex, l, m, N.l);
+        A ra = query(a, bex, m, rex, N.r);
         return app(aggr(la, ra), N.lazy, min(bex, rex) - max(a, l));
     }
 
@@ -64,7 +65,7 @@ struct segT {
         assert(0 <= l && l <= rex && rex <= sz);
         segT t = *this;
         t.root = update(l, rex, 0, sz, root, u);
-        if(!persistent) this->root = t.root;
+        if(!persistent) root = t.root;
         return t;
     }
 
@@ -79,5 +80,4 @@ struct segT {
         if(l==rex) return -1;
         A curr_agg = e;
         return lower_bound(l, rex, 0, sz, root, curr_agg, id, p, rtl) + !rtl;
-    }
-};
+    }};
