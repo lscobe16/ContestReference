@@ -1,22 +1,18 @@
-// unions[i] >= 0 => unions[i] =  parent
-// unions[i]  < 0 => unions[i] = -height
-vector<int> unions;
+#pragma once
+#include "./header.h"
 
-void init(int n) { //Initialisieren
-	unions.assign(n, -1);
-}
-
-int findSet(int n) { // Pfadkompression
-	if (unions[n] < 0) return n;
-	return unions[n] = findSet(unions[n]);
-}
-
-void linkSets(int a, int b) { // Union by rank.
-	if (unions[b] > unions[a]) swap(a, b);
-	if (unions[b] == unions[a]) unions[b]--;
-	unions[a] = b;
-}
-
-void unionSets(int a, int b) { // Diese Funktion aufrufen.
-	if (findSet(a) != findSet(b)) linkSets(findSet(a), findSet(b));
-}
+/// O(alpha(n))
+struct union_find {
+    vz e; //<0: -(maximum possible) height @\yellow{size}@, else: parent
+    union_find(z sz) : e(sz, -1) {}
+    z find(z a) {return e[a] < 0 ? a : e[a] = find(e[a]);}
+    void unite(z a, z b) {
+        a = find(a), b = find(b);
+        if (a == b) return;
+        if (e[a] > e[b]) swap(a, b);
+        e[a] -= @\yellow{e[a] == }@e[b]; @\yellowBox{for storing+uniting by size(slower)}@
+        e[b] = a;
+    }
+    bool same(z a, z b) {return find(a) == find(b);}
+    @\yellow{z sz(z a) {return -e[find(a)];}}@
+};
