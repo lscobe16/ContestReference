@@ -14,9 +14,8 @@ struct segT {
         A agg; //or value (for leaves)
         U lazy;
     };    @\greenBox{not persistent}@  @\yellowBox{persistent}@
-    @\green{vector<node> v = {{0, 0, e, id}};}@
-    @\yellow{shared_ptr<vector<node>> v{new vector<node>{{0, 0, e, id}}};}@
-@\yellow{#define v (*v)}@
+    @\yellow{shared_ptr<}@vector<node>@\yellow>@ v@\yellowE{\{new vector<node>}@{{0, 0, e, id}}@\yellowE\}@;
+@\yellowE{\#define v (*v)}@
 #define N v[n]
     z root = 0;
 
@@ -38,7 +37,8 @@ struct segT {
         if(bex <= l || rex <= a) return e;
         if(a <= l && rex <= bex) return N.agg;
         z m = (l + rex) / 2;
-        A la = query(a, bex, l, m, N.l), ra = query(a, bex, m, rex, N.r);
+        A la = query(a, bex, l, m, N.l);
+        A ra = query(a, bex, m, rex, N.r);
         return app(aggr(la, ra), N.lazy, min(bex, rex) - max(a, l));
     }
 
@@ -55,11 +55,11 @@ struct segT {
         return lower_bound(a, bex, @\opt{rtl?l:}@m, @\opt{rtl?m:}@rex, @\opt{rtl?N.l:}@N.r, cur_agg, lazy, p, rtl);
     }
 #undef N
-@\yellow{#undef v}@
+@\yellowE{\#undef v}@
 
     @\green{void}\yellow{segT}@ update(z l, z rex, U u) {
         @\opt{assert(0 <= l && l <= rex && rex <= sz);}@
-        @\green{this->root = update(l, rex, 0, sz, root, u);}@
+        @\green{root = update(l, rex, 0, sz, root, u);}@
         @\yellow{return segT{sz, e, id, v, update(l, rex, 0, sz, root, u)};}@
     }
 
