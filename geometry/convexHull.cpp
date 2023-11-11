@@ -1,7 +1,6 @@
 vector<pt> convexHull(vector<pt> pts){
-	sort(all(pts), [](const pt& a, const pt& b){
-		return real(a) == real(b) ? imag(a) < imag(b)
-		                          : real(a) < real(b);
+	sort(all(pts), [](au a, au b){
+        return pair{a.real(), a.imag()} < pair{b.real(), b.imag()};
 	});
 	pts.erase(unique(all(pts)), pts.end());
 	int k = 0;
