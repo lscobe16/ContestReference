@@ -27,7 +27,7 @@ struct treap {
     void seta(A _a) {a = _a; update();}
 
     @\greenE{void push() \{}@ // @\red{always}@ call before visiting/changing l or r
-    @\greenE\Quad\green{for(au c : {l, r})}@
+    @\greenE\Quad\green{fe(c : {l, r})}@
     @\greenE{\Quad\Quad}\green{if(c) c->apply(lazy)}\red,\green{ c->lazy_rev ^= lazy_rev;}@
     @\greenE\Quad\green{lazy = id;}@
     @\greenE\Quad\blue{if(lazy_rev) swap(l, r)}\red,\blue{ lazy_rev = 0;}@
