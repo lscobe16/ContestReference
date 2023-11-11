@@ -32,11 +32,7 @@
 	\sourcecode{datastructures/fenwickTree2.cpp}
 \end{algorithm}
 
-\begin{algorithm}{(Implicit) Treap (Cartesian Tree)}
-	%\begin{methods} %TODO: delete!? or update
-	%	\method{insert}{fügt wert $\mathit{val}$ an stelle $i$ ein (verschiebt alle Positionen >= $i$)}{\log(n)}
-	%	\method{remove}{löscht werte $[i,i+\mathit{count})$}{\log(n)}
-	%\end{methods}
+\begin{algorithm}{Treap}
 	Addons: \green{lazy updates}, \yellow{key}, \blue{reverse (wenn kommutativ und kein key)}
 	\sourcecode{datastructures/treap3.cpp}
 \end{algorithm}
@@ -44,7 +40,7 @@
 \begin{algorithm}{Range Minimum Query}
 	\begin{methods}
 		\method{init}{baut Struktur auf}{n\*\log(n)}
-		\method{queryIdempotent}{Index des Minimums in [l, r)}{1}
+		\method{queryIdempotent}{Index des Minimums in [l, rex)}{1}
 	\end{methods}
 	\begin{itemize}
 		\item \code{better}-Funktion muss idempotent sein!

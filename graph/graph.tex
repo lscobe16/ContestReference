@@ -17,9 +17,9 @@
 
 \begin{algorithm}{Lowest Common Ancestor \& Eulertour}
 	\begin{methods}
-		\method{init}{baut DFS-Baum über $g$ auf}{\abs{V}\*\log(\abs{V})}
-		\method{getLCA}{findet LCA}{1}
-		\method{getDepth}{berechnet Distanz zur Wurzel im DFS-Baum}{1}
+		\method{LCA}{Vorberechnung: baut Eulertour über $G$ auf}{n\*\log(n)}
+		\method{of}{findet LCA}{1}
+		\method{dist}{Anzahl Kanten zwischen $u$ und $v$}{1}
 	\end{methods}
 	\sourcecode{graph/LCA_sparse.cpp}
 \end{algorithm}

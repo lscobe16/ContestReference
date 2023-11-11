@@ -1,6 +1,7 @@
 // Komplexe Zahlen als Punkte. Wenn immer möglich complex<ll>
 // verwenden. Funktionen wie abs() geben dann aber ll zurück.
 using pt = complex<double>;
+using vpt = vector<pt>;
 
 constexpr double PIU = acos(-1.0l); // PIL < PI < PIU
 constexpr double PIL = PIU-2e-19l;
