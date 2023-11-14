@@ -29,6 +29,8 @@ Dieser Abschnitt enthält lediglich Dinge die während der Practicesession getes
 	\item ist der Checker casesensitive?
 	\item wie werden zusätzliches Whitespacecharacter bei sonst korrektem Output behandelt?
 	\item vergleiche ausführungszeit auf dem judge und lokal (z.b. mit Primzahl Sieb)
+	\item wird Memory Exceeded als RTE angezeigt?
+	\item wie viele rekursive (DFS)-Aufrufe passen auf den Stack?
 \end{itemize}
 \sourcecode{tests/whitespace.cpp}
 
@@ -42,3 +44,11 @@ Dieser Abschnitt enthält lediglich Dinge die während der Practicesession getes
 	\item \textasciitilde$8e^{-17}$ with excess precision (real value)
 \end{itemize}
 \sourcecode{tests/precision.cpp}
+
+\begin{algorithm}{Compiletime Computations}
+	\begin{itemize}
+		\item überprüfen ob Compilezeit Berechnungen erlaubt sind!
+		\item braucht \code{c++14} oder höher!
+	\end{itemize}
+	\sourcecode{other/compiletime.cpp}
+\end{algorithm}

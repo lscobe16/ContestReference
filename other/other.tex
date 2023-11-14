@@ -111,7 +111,7 @@
 	\sourcecode{other/stress.sh}
 \end{algorithm}
 
-\clearpage
+% \clearpage
 \subsection{Gemischtes}
 \begin{itemize}
 	\item \textbf{(Minimum) Flow mit Demand \textit{d}:}
@@ -183,35 +183,35 @@
 	\item \textbf{Verteilung von Primzahlen:}
 	Für alle $n \in \mathbb{N}$ gilt: Ex existiert eine Primzahl $p$ mit $n \leq p \leq 2n$.
 
-	\item \textbf{Satz von \textsc{Kirchhoff}:}
-	Sei $G$ ein zusammenhängender, ungerichteter Graph evtl. mit Mehrfachkanten.
-	Sei $A$ die Adjazenzmatrix von $G$.
-	Dabei ist $a_{ij}$ die Anzahl der Kanten zwischen Knoten $i$ und $j$.
-	Sei $B$ eine Diagonalmatrix, $b_{ii}$ sei der Grad von Knoten $i$.
-	Definiere $R = B - A$.
-	Alle Kofaktoren von $R$ sind gleich und die Anzahl der Spannbäume von $G$.
-	\newline
-	Entferne letzte Zeile und Spalte und berechne Betrag der Determinante.
+	% \item \textbf{Satz von \textsc{Kirchhoff}:}
+	% Sei $G$ ein zusammenhängender, ungerichteter Graph evtl. mit Mehrfachkanten.
+	% Sei $A$ die Adjazenzmatrix von $G$.
+	% Dabei ist $a_{ij}$ die Anzahl der Kanten zwischen Knoten $i$ und $j$.
+	% Sei $B$ eine Diagonalmatrix, $b_{ii}$ sei der Grad von Knoten $i$.
+	% Definiere $R = B - A$.
+	% Alle Kofaktoren von $R$ sind gleich und die Anzahl der Spannbäume von $G$.
+	% \newline
+	% Entferne letzte Zeile und Spalte und berechne Betrag der Determinante.
 
-	\item \textbf{\textsc{Dilworths}-Theorem:}
-	Sei $S$ eine Menge und $\leq$ eine partielle Ordnung ($S$ ist ein Poset).
-	Eine \emph{Kette} ist eine Teilmenge $\{x_1,\ldots,x_n\}$ mit $x_1 \leq \ldots \leq x_n$.
-	Eine \emph{Partition} ist eine Menge von Ketten, sodass jedes $s \in S$ in genau einer Kette ist.
-	Eine \emph{Antikette} ist eine Menge von Elementen, die paarweise nicht vergleichbar sind.
-	\newline
-	Es gilt: Die Größe der längsten Antikette gleicht der Größe der kleinsten Partition.
-	$\Rightarrow$ \emph{Weite} des Poset.
-	\newline
-	Berechnung: Maximales Matching in bipartitem Graphen.
-	Dupliziere jedes $s \in S$ in $u_s$ und $v_s$.
-	Falls $x \leq y$, füge Kante $u_x \to v_y$ hinzu.
-	Wenn Matching zu langsam ist, versuche Struktur des Posets auszunutzen und evtl. anders eine maximale Anitkette zu finden.
+	% \item \textbf{\textsc{Dilworths}-Theorem:}
+	% Sei $S$ eine Menge und $\leq$ eine partielle Ordnung ($S$ ist ein Poset).
+	% Eine \emph{Kette} ist eine Teilmenge $\{x_1,\ldots,x_n\}$ mit $x_1 \leq \ldots \leq x_n$.
+	% Eine \emph{Partition} ist eine Menge von Ketten, sodass jedes $s \in S$ in genau einer Kette ist.
+	% Eine \emph{Antikette} ist eine Menge von Elementen, die paarweise nicht vergleichbar sind.
+	% \newline
+	% Es gilt: Die Größe der längsten Antikette gleicht der Größe der kleinsten Partition.
+	% $\Rightarrow$ \emph{Weite} des Poset.
+	% \newline
+	% Berechnung: Maximales Matching in bipartitem Graphen.
+	% Dupliziere jedes $s \in S$ in $u_s$ und $v_s$.
+	% Falls $x \leq y$, füge Kante $u_x \to v_y$ hinzu.
+	% Wenn Matching zu langsam ist, versuche Struktur des Posets auszunutzen und evtl. anders eine maximale Anitkette zu finden.
 	
-	\item \textbf{\textsc{Turan}'s-Theorem:}
-	Die Anzahl an Kanten in einem Graphen mit $n$ Knoten der keine clique der größe $x+1$ enthält ist:
-	\begin{align*}
-	ext(n, K_{x+1}) &= \binom{n}{2} - \left[\left(x - (n \bmod x)\right) \cdot \binom{\floor{\frac{n}{x}}}{2} + \left(n\bmod x\right)  \cdot \binom{\ceil{\frac{n}{x}}}{2}\right]
-	\end{align*}
+	% \item \textbf{\textsc{Turan}'s-Theorem:}
+	% Die Anzahl an Kanten in einem Graphen mit $n$ Knoten der keine clique der größe $x+1$ enthält ist:
+	% \begin{align*}
+	% ext(n, K_{x+1}) &= \binom{n}{2} - \left[\left(x - (n \bmod x)\right) \cdot \binom{\floor{\frac{n}{x}}}{2} + \left(n\bmod x\right)  \cdot \binom{\ceil{\frac{n}{x}}}{2}\right]
+	% \end{align*}
 	
 	\item \textbf{\textsc{Euler}'s-Polyedersatz:}
 	In planaren Graphen gilt $n-m+f-c=1$.
@@ -284,9 +284,11 @@
 	\item Wrong Answer:
 	\begin{itemize}
 		\item Lies Aufgabe erneut. Sorgfältig!
+		\item Compile Warnings anschauen!
+		\item Debuggen! (kostet nichts)
 		\item Mehrere Testfälle in einer Datei? Probiere gleichen Testcase mehrfach hintereinander.
-		\item Integer Overflow? Teste maximale Eingabegrößen und mache Überschlagsrechnung.
 		\item Ausgabeformat im 'unmöglich'-Fall überprüfen.
+		\item Integer Overflow? Teste maximale Eingabegrößen und mache Überschlagsrechnung.
 		\item Ist das Ergebnis modulo einem Wert?
 		\item Integer Division rundet zur $0$ $\neq$ abrunden.
 		\item Eingabegrößen überprüfen. Sonderfälle ausprobieren.
@@ -302,5 +304,31 @@
 		\end{itemize}
 		\item Bei DP/Rekursion: Stimmt Basisfall?
 		\item Unsicher bei benutzten STL-Funktionen?
+	\end{itemize}
+
+	\item Interaktive Aufgaben:
+	\begin{itemize}
+		\item Vor Einlesen Ausgabe flushen
+		\item Nicht zu faul sein, zu testen
+		\item Gibt es ein Testtool?
+	\end{itemize}
+\end{itemize}
+
+\columnbreak
+\subsection{Strategie}
+
+\begin{itemize}
+	\item Die einfachsten Aufgaben sollten schnell gelöst werden.
+	\begin{itemize}
+		\item Einer tippt Template, zwei überfliegen Aufgaben.
+		\item IO-Komplexität als Heuristik für Schwierigkeit
+		\item Aufgaben die in den ersten 20 Minuten von anderen Teams gelöst wurden, sollten wir auch angehen
+	\end{itemize}
+	\item Häufig drucken! Bei nicht 100\%er Abgabe sofort, ansonsten bei !SUCCESS
+	\item PC-Zeit Triage: Implementieren > Debuggen > nicht nutzen; kurzer Code > langer Code
+	\item Reference Sheet verwenden:
+	\begin{itemize}
+		\item Vor dem Abtippen (insb. von SegTree): geht es einfacher? (iterSegTree, RMQ, PrefixSum?)
+		\item Nach dem Abtippen: Abtipper und eine weitere Person lesen drüber (kostet nicht viel Zeit)
 	\end{itemize}
 \end{itemize}
