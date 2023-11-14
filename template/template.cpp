@@ -26,6 +26,6 @@ au operator+(ostream& o, au t) {return o << t << '\n';}
 int32_t main() {
     @\opt{cin.tie(0)->sync_with_stdio(0);}@
     @\opt{cout.precision(16);}@
-    @\opt{cin.exceptions(cin.failbit);}@ // some WA -> RTE
+    @\opt{cin.exceptions(cin.failbit);}@ // some WAs ~> RTE
 
 }
