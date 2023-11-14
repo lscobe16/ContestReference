@@ -105,13 +105,13 @@ Sei $d_{i\smash{j}}$ die Distanzmatrix von $G$, dann gibt $d_{i\smash{j}}^k$ die
 Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, dann gibt $a_{i\smash{j}}^k$ die Anzahl der Wege von $i$ nach $j$ mit Länge genau \textcolor{gray}{(maximal)} $k$ an mit der Verknüpfung: $c_{i\smash{j}} = a_{i\smash{j}} \otimes b_{i\smash{j}} = \sum a_{ik} \cdot b_{k\smash{j}}$
 
 
-\begin{algorithm}{Erd\H{o}s-Gallai}
-	Sei $d_1 \geq \cdots \geq d_{n}$. Es existiert genau dann ein Graph $G$ mit Degreesequence $d$ falls $\sum\limits_{i=1}^{n} d_i$ gerade ist und für $1\leq k \leq n$: $\sum\limits_{i=1}^{k} d_i \leq k\cdot(k-1)+\sum\limits_{i=k+1}^{n} \min(d_i, k)$
-	\begin{methods}
-		\method{havelHakimi}{findet Graph}{(\abs{V}+\abs{E})\cdot\log(\abs{V})}
-	\end{methods}
-	\sourcecode{graph/havelHakimi.cpp}
-\end{algorithm}
+% \begin{algorithm}{Erd\H{o}s-Gallai}
+% 	Sei $d_1 \geq \cdots \geq d_{n}$. Es existiert genau dann ein Graph $G$ mit Degreesequence $d$ falls $\sum\limits_{i=1}^{n} d_i$ gerade ist und für $1\leq k \leq n$: $\sum\limits_{i=1}^{k} d_i \leq k\cdot(k-1)+\sum\limits_{i=k+1}^{n} \min(d_i, k)$
+% 	\begin{methods}
+% 		\method{havelHakimi}{findet Graph}{(\abs{V}+\abs{E})\cdot\log(\abs{V})}
+% 	\end{methods}
+% 	\sourcecode{graph/havelHakimi.cpp}
+% \end{algorithm}
 
 \begin{algorithm}{Dynamic Connectivity}
 	\begin{methods}
