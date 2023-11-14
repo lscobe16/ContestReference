@@ -212,24 +212,27 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \optional{
 \subsubsection{Capacity Scaling}
 \begin{methods}
-	\method{maxFlow}{gut bei dünn besetzten Graphen.}{\abs{E}^2\*\log(C)}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{gut bei dünn besetzten Graphen.}{\abs{E}^2\*\log(C)}
 \end{methods}
 \sourcecode{graph/capacityScaling.cpp}
 }
 
 \subsubsection{Push Relabel}
 \begin{methods}
-	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
 \end{methods}
 \sourcecode{graph/pushRelabel2.cpp}
 
 \subsubsection{Dinic's Algorithm mit Capacity Scaling}
 \begin{methods}
-	\method{maxFlow}{doppelt so schnell wie Ford Fulkerson}{\abs{V}^2\cdot\abs{E}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{doppelt so schnell wie Ford Fulkerson}{\abs{V}^2\cdot\abs{E}}
 \end{methods}
+Unit-Graph (jeder Knoten hat nur eine Ein-/Ausgehende Kante mit Kapazität 1)
+$\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{V}})$.
+Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \sourcecode{graph/dinicScaling.cpp}
 
 \optional{
