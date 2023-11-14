@@ -44,7 +44,7 @@ struct treap {
 
 using T = treap*;
 
-T pair<T, T> split(T t, B b, bool before = true) {
+pair<T, T> split(T t, B b, bool before = true) {
     if(!t) return {t, t};
     @\green{t->push();}@
     if(b-before < sz(t->l) || (b -= sz(t->l) + 1, 0)) {
@@ -54,8 +54,7 @@ T pair<T, T> split(T t, B b, bool before = true) {
         t->l = r;
         if(l) t->update();
         return {l, t};
-    }
-    else {
+    } else {
         au [l, r] = split(t->r, b, before);
         t->r = l;
         if(r) t->update();
@@ -70,8 +69,7 @@ T merge(T l, T r) {
         l->r = merge(l->r, r);
         l->update();
         return l;
-    }
-    else {
+    } else {
         @\green{r->push();}@
         r->l = merge(l, r->l);
         r->update();
@@ -81,18 +79,16 @@ T merge(T l, T r) {
 @\redBox{Check that t!=0 before accessing t->agg!:}@
 @\opt{A agg(T t) {return t ? t->agg : __insert_neutral_A__;}}@
 
-T extract(T& t, au a, au b, bool bex = true) {
+T extract(T& t, au a, au b, bool bex = true) { 
     // for other stuff on ranges of T, copy this, ...
     au [tl, _] = split(t, a);
     au [tm, tr] = split(_, b, bex);
     // ...do stuff with tl/tm/tr here...
-    t = merge(merge(tl, 0), tr); // ...and replace this 0 with tm
+    t = merge(tl, tr); // ...and replace this tl with merge(tl, tm)
     return tm;
 }
 
-void insert(T& t, T o, au b, bool before = true) {
-    au [tl, _] = split(t, b, before);
-    au [tm, tr] = split(_, b, before);
-    tm = o;
-    t = merge(merge(tl, tm), tr);
+void insert(T& t, T o, au b, bool before = true) { 
+    au [tl, tr] = split(t, b, before);
+    t = merge(merge(tl, o), tr);
 }

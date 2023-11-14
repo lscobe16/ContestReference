@@ -19,12 +19,13 @@ using vz = vector<z>;
 au operator-(ostream& o, au t) {return o << t << ' ';}
 au operator+(ostream& o, au t) {return o << t << '\n';}
 
-@\opt{z INF = 1e18;}@ //max z ca= 9e18
+@\opt{z INF = 1e18;}@ //max z = ca. 9e18
 
 @\optE{\#define dbg(x) (cerr<<\_\_LINE\_\_<<": \textbackslash}\optE{t"\#x}\opt{" = ")+x;}@
 
 int32_t main() {
     @\opt{cin.tie(0)->sync_with_stdio(0);}@
     @\opt{cout.precision(16);}@
+    @\opt{cin.exceptions(cin.failbit);}@ // some WAs ~> RTE
 
 }
