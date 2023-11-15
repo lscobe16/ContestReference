@@ -105,13 +105,13 @@ Sei $d_{i\smash{j}}$ die Distanzmatrix von $G$, dann gibt $d_{i\smash{j}}^k$ die
 Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, dann gibt $a_{i\smash{j}}^k$ die Anzahl der Wege von $i$ nach $j$ mit Länge genau \textcolor{gray}{(maximal)} $k$ an mit der Verknüpfung: $c_{i\smash{j}} = a_{i\smash{j}} \otimes b_{i\smash{j}} = \sum a_{ik} \cdot b_{k\smash{j}}$
 
 
-\begin{algorithm}{Erd\H{o}s-Gallai}
-	Sei $d_1 \geq \cdots \geq d_{n}$. Es existiert genau dann ein Graph $G$ mit Degreesequence $d$ falls $\sum\limits_{i=1}^{n} d_i$ gerade ist und für $1\leq k \leq n$: $\sum\limits_{i=1}^{k} d_i \leq k\cdot(k-1)+\sum\limits_{i=k+1}^{n} \min(d_i, k)$
-	\begin{methods}
-		\method{havelHakimi}{findet Graph}{(\abs{V}+\abs{E})\cdot\log(\abs{V})}
-	\end{methods}
-	\sourcecode{graph/havelHakimi.cpp}
-\end{algorithm}
+% \begin{algorithm}{Erd\H{o}s-Gallai}
+% 	Sei $d_1 \geq \cdots \geq d_{n}$. Es existiert genau dann ein Graph $G$ mit Degreesequence $d$ falls $\sum\limits_{i=1}^{n} d_i$ gerade ist und für $1\leq k \leq n$: $\sum\limits_{i=1}^{k} d_i \leq k\cdot(k-1)+\sum\limits_{i=k+1}^{n} \min(d_i, k)$
+% 	\begin{methods}
+% 		\method{havelHakimi}{findet Graph}{(\abs{V}+\abs{E})\cdot\log(\abs{V})}
+% 	\end{methods}
+% 	\sourcecode{graph/havelHakimi.cpp}
+% \end{algorithm}
 
 \begin{algorithm}{Dynamic Connectivity}
 	\begin{methods}
@@ -212,24 +212,27 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \optional{
 \subsubsection{Capacity Scaling}
 \begin{methods}
-	\method{maxFlow}{gut bei dünn besetzten Graphen.}{\abs{E}^2\*\log(C)}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{gut bei dünn besetzten Graphen.}{\abs{E}^2\*\log(C)}
 \end{methods}
 \sourcecode{graph/capacityScaling.cpp}
 }
 
 \subsubsection{Push Relabel}
 \begin{methods}
-	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
 \end{methods}
 \sourcecode{graph/pushRelabel2.cpp}
 
 \subsubsection{Dinic's Algorithm mit Capacity Scaling}
 \begin{methods}
-	\method{maxFlow}{doppelt so schnell wie Ford Fulkerson}{\abs{V}^2\cdot\abs{E}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
+	\method{maxFlow}{doppelt so schnell wie Ford Fulkerson}{\abs{V}^2\cdot\abs{E}}
 \end{methods}
+Unit-Graph (jeder Knoten hat nur eine Ein-/Ausgehende Kante mit Kapazität 1)
+$\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{V}})$.
+Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \sourcecode{graph/dinicScaling.cpp}
 
 \optional{
