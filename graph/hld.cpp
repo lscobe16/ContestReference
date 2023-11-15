@@ -1,5 +1,5 @@
 vector<vector<int>> adj;
-vector<int> sz, in, out, nxt, par;
+vector<int> sz, in, nxt, par;
 int counter;
 
 void dfs_sz(int v = 0, int from = -1) {
@@ -17,13 +17,12 @@ void dfs_hld(int v = 0, int from = -1) {
 		nxt[u] = (u == adj[v][0]) ? nxt[v] : u;
 		dfs_hld(u, v);
 	}
-	out[v] = counter;
 }
 
 void init(int root = 0) {
 	int n = sz(adj);
 	sz.assign(n, 1), nxt.assign(n, 0), par.assign(n, -1);
-	in.resize(n), out.resize(n);
+	in.resize(n);
 	counter = 0;
 	dfs_sz(root);
 	dfs_hld(root);
