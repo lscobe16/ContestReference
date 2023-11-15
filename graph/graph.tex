@@ -44,14 +44,14 @@
 	\sourcecode{graph/centroid.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Heavy-Light Decomposition}
+\begin{algorithm}{Heavy-Light Decomposition} %TODO update doc (insb. Option edges(green) + move some comments here?), test
 	\begin{methods}
 		\method{get\_intervals}{gibt Zerlegung des Pfades von $u$ nach $v$}{\log(\abs{V})}
 	\end{methods}
 	\textbf{Wichtig:} Intervalle sind halboffen
 	
 	Subbaum unter dem Knoten $v$ ist das Intervall  $[\text{\code{in[v]}},~\text{\code{out[v]}})$.
-	\sourcecode{graph/hld.cpp}
+	\sourcecode{graph/hld2.cpp}
 \end{algorithm}
 \clearpage
 
