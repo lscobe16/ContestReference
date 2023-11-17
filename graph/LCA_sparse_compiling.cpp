@@ -34,7 +34,7 @@ struct LCA {
 };
 
 
-
+// tested on: https://judge.yosupo.jp/problem/lca
 int main(int argc, char const *argv[])
 {
     z N, Q;
