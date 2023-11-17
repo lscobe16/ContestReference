@@ -8,7 +8,7 @@ struct iterSegT {
 
     iterSegT(z n): n(n), v(2 * n, e) {}
     iterSegT(vector<A> s): n(s.size()), v(n, e) {
-        v.insert(v.end(), be(s));
+        v.insert(v.end(), s.begin(), s.end());
         @\green{for (z i = n; i-- > 0;)}@
             @\green{v[i] = agg(v[2 * i], v[2 * i + 1]);}@
     }
@@ -18,6 +18,7 @@ struct iterSegT {
         v[i += n] = a;
         while (i /= 2) v[i] = agg(v[2 * i], v[2 * i + 1]);
     }
+    @\opt{A get(z i) {return v[i+n];}}@
 
     A query(z l, z rex) {
         A la = e, ra = e;
