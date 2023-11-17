@@ -80,10 +80,3 @@ double distBetweenSegments(pt a, pt b, pt c, pt d) {
 	return min({distToSegment(a, b, c), distToSegment(a, b, d),
 	            distToSegment(c, d, a), distToSegment(c, d, b)});
 }
-
-// sortiert alle Punkte pts auf einer Linie entsprechend dir
-void sortLine(pt dir, vector<pt>& pts) { // (2d und 3d)
-	sort(all(pts), [&](pt a, pt b){
-		return dot(dir, a) < dot(dir, b);
-	});
-}
