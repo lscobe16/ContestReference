@@ -28,17 +28,12 @@
 \clearpage
 
 \subsection{Mod-Exponent und Multiplikation über $\boldsymbol{\mathbb{F}_p}$}
-%\vspace{-1.25em}
-%\begin{multicols}{2}
-\method{mulMod}{berechnet $a \cdot b \bmod n$}{\log(b)}
-\sourcecode{math/modMulIterativ.cpp}
-%	\vfill\null\columnbreak
-\method{powMod}{berechnet $a^b \bmod n$}{\log(b)}
-\sourcecode{math/modPowIterativ.cpp}
-%\end{multicols}
-%\vspace{-2.75em}
+\method{modmul}{berechnet $a \cdot b \bmod M$}{1}
+\method{modpow}{berechnet $b^e \bmod M$}{\log(e)}
+	\sourcecode{math/modMulPow.cpp}
 \begin{itemize}
-	\item für $a > 10^9$ \code{__int128} oder \code{modMul} benutzten!
+	\item für $a > 10^9$ \code{__int128} oder \code{modmul} benutzten!
+	\item modmul ca. 1,3x - 2x schneller
 \end{itemize}
 
 \begin{algorithm}{ggT, kgV, erweiterter euklidischer Algorithmus}
