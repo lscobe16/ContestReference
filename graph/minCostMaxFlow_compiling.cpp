@@ -33,9 +33,9 @@ struct MinCostFlow {
 	MinCostFlow(z n, z source, z target) :
 		n(n), adj(n), s(source), t(target) {};
 
-	void addEdge(z u, z v, z c, z cost) {
+	void addEdge(z u, z v, z cap, z cost) {
 		adj[u].push_back(E.size());
-		E.push_back({v, c, cost});
+		E.push_back({v, cap, cost});
 		adj[v].push_back(E.size());
 		E.push_back({u, 0, -cost});
 	}
@@ -51,6 +51,7 @@ struct MinCostFlow {
 		pref[s] = s;
 		inQ[s] = true;
 
+		// runs infinitely if there is a cost-negative cycle
 		while (!Q.empty()) {
 			z cur = Q.front(); Q.pop();
 			inQ[cur] = false;
@@ -79,11 +80,13 @@ struct MinCostFlow {
 			E[con[u] ^ 1].f += w;
 	}}
 
-	void minCostFlow() { // successive shortest path
+	void run() { // successive shortest path
 		con.assign(n, 0);
 		maxFlow = minCost = 0;
 		while (spfa()) extend();
-}};
+	} // results in maxFlow and minCost
+};
+
 
 // tested on: https://open.kattis.com/problems/mincostmaxflow
 int32_t main() {

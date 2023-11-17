@@ -62,5 +62,5 @@ struct MinCostFlow {
 		con.assign(n, 0);
 		maxFlow = minCost = 0;
 		while (spfa()) extend();
-	}
+	} // results in maxFlow and minCost
 };
