@@ -46,13 +46,13 @@ bool pointOnLine(pt a, pt b, pt p) {
 	return cross(a, b, p) == 0;
 }
 
-// Test auf Linienschnitt zwischen a-b und c-d.
+// Test auf Schnitt der Geraden a-b und c-d.
 bool lineIntersection(pt a, pt b, pt c, pt d) {
 	return abs(cross(a - b, c - d)) < EPS;
 }
 
-// Berechnet den Schnittpunkt der Graden p0-p1 und p2-p3.
-// die Graden dürfen nicht parallel sein!
+// Berechnet den Schnittpunkt der Geraden p0-p1 und p2-p3.
+// die Geraden dürfen nicht parallel sein!
 pt lineIntersection(pt p0, pt p1, pt p2, pt p3) {
 	double a = cross(p1 - p0, p3 - p2);
 	double b = cross(p2 - p0, p3 - p2);

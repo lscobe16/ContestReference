@@ -13,7 +13,7 @@ vector<pt> circleIntersection(pt c1, double r1,
 }
 
 // berechnet die Schnittpunkte zwischen
-// einem Kreis(Kugel) und einer Grade 2d und 3d
+// einem Kreis(Kugel) und einer Gerade 2d und 3d
 vector<pt> circleRayIntersection(pt center, double r,
                                  pt orig, pt dir) {
 	vector<pt> result;

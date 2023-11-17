@@ -37,15 +37,15 @@ bool pointOnPlane(pt3 a, pt3 b, pt3 c, pt3 p) {
 	return orientation(a, b, c, p) == 0;
 }
 
-// Schnittpunkt von der Grade a-b und der Ebene c,d,e
-// die Grade darf nicht parallel zu der Ebene sein!
+// Schnittpunkt von der Gerade a-b und der Ebene c,d,e
+// die Gerade darf nicht parallel zu der Ebene sein!
 pt3 linePlaneIntersection(pt3 a, pt3 b, pt3 c, pt3 d, pt3 e) {
 	pt3 n = cross(d-c, e-c);
 	pt3 d = b - a;
 	return a - d * (dot(n, a) - dot(n, c)) / dot(n, d);
 }
 
-// Abstand zwischen der Grade a-b und c-d
+// Abstand zwischen der Gerade a-b und c-d
 double lineLineDist(pt3 a, pt3 b, pt3 c, pt3 d) {
 	pt3 n = cross(b - a, d - c);
 	if (abs(n) < EPS) return distToLine(a, b, c);
