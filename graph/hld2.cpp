@@ -18,8 +18,6 @@ struct hld {
 			dfs_hld(v, v==g[u][0] ? h : v, g);
 	}
 
-	// to initialize all vertices/edges in O(n) after construction,
-	// call on_path for each vertex/edge
 	hld(vvz @\redE{\sout{\&}}@g, z r = 0) {
 		z n = g.size();
 		par = in = head = vz(n);
@@ -29,21 +27,16 @@ struct hld {
 			decomp(r, r, g);
 	@\yellowE\}@}
 
-	// u, v inclusive
-	// void f(l, rex). Always l < rex. Calls are not ordered!
-	// O(log n) calls to f  (=> often time complexity O(log@$^2$@n))
-	z on_path(z u, z v, au f) {
+	z on_path(z u, z v, au f) { @\grayBox{returns lca}@
 		while(1) {
 			if(in[v] < in[u]) swap(u, v);
 			@\green{if(u!=v)}@ f(max(in[u]@\green{ + 1}@, in[head[v]]), in[v] + 1);
-			if(in[v = head[v]] <= in[u]) return u; // returns lca
+			if(in[v = head[v]] <= in[u]) return u;
 			v = par[v];
 		}
 	}
 
-	// void f(l, rex). Always l < rex.
-	// 1 call to f  (=> often time complexity O(log n))
-	void on_subtree(z r, au f) {
+	void on_subtree(z r, au f) { @\optAnn@
 		@\green{if(sz[r]>1)}@ f(in[r]@\green{ + 1}@, in[r] + sz[r]);
 	}
 }

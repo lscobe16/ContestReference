@@ -44,13 +44,14 @@
 	\sourcecode{graph/centroid.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Heavy-Light Decomposition} %TODO update doc (insb. Option edges(green) + move some comments here?), test
+\begin{algorithm}{Heavy-Light Decomposition}
 	\begin{methods}
-		\method{get\_intervals}{gibt Zerlegung des Pfades von $u$ nach $v$}{\log(\abs{V})}
+		\method{on\_path}{ruft $\O{\log{\abs{V}}}$ Mal $f(l, rex)$ auf, sodass $u$-$v$-Pfad genau abgedeckt\\&
+		Aufrufe unsortiert! Also ggf. per f extracten und dann sortieren}{}
+		\method{on\_subtree}{ruft 1 Mal $f(l, rex)$ auf, sodass Subtree unter $u$ genau abgedeckt}{}
+		\method{get\_lca}{= on\_path(., ., []\{\})}{}
 	\end{methods}
-	\textbf{Wichtig:} Intervalle sind halboffen
-	
-	Subbaum unter dem Knoten $v$ ist das Intervall  $[\text{\code{in[v]}},~\text{\code{out[v]}})$.
+	To initialize all vertices/edges in $\O(n)$ after construction, call on\_path for each vertex/edge.
 	\sourcecode{graph/hld2.cpp}
 \end{algorithm}
 \clearpage
