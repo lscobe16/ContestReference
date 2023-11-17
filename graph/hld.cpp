@@ -30,10 +30,22 @@ void init(int root = 0) {
 
 template<typename F>
 void for_intervals(int u, int v, F&& f) {
-	for (;; v = par[head[v]]) {
+	while(1) {
 		if (in[v] < in[u]) swap(u, v);
+		//in[u] <= in[v], also v kein ancestor von u
+		//Also l := lca(u,v) = u oder von l gehts erst (echt) nach u und dann nach v.
+		//Fall 1: u=v.
+		// 	Dann müssen wir noch f *für* [u,u] aufrufen (falls nicht schon passiert!)
+		//Fall 2: u!=v.
+		//	Dann kann man von v aus noch hochlaufen
+		//	Fall a: in[head[v]] <= in[u].
+		//		Also in[head[v]] <= in[u] <= in[v].
+		//		Damit muss u auf dem Pfad von head[v] nach v liegen.
+		//
+		//	Wir laufen im Teilbaum so hoch, wie wir können, d.h. bis zum tieferen von u und head[v]
 		f(max(in[u], in[head[v]]), in[v] + 1);
-		if (in[head[v]] <= in[u]) return;
+		if (in[v = head[v]] <= in[u]) return;
+		v = par[v];
 }}
 
 int get_lca(int u, int v) {
