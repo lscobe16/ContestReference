@@ -286,7 +286,8 @@ Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \begin{algorithm}{Min-Cost-Max-Flow}
 	\begin{methods}
 		\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein. Negative Kosten erlaubt.}{1} % TODO: negative Zyklen nicht erlaubt, für decomp?
-		\method[asume $\O(F (n+m) \log n)$]{run}{berechnet maximalen Fluss F mit minimalen Kosten}{\abs{V}\cdot\abs{E}\cdot F}
+		\method{run}{berechnet maximalen Fluss F mit minimalen Kosten}{\abs{V}\cdot\abs{E}\cdot F}
+		& Chris: assume $\O(F (n+m) \log n)$
 	\end{methods}
 	\sourcecode{graph/minCostMaxFlow.cpp}
 \end{algorithm}
