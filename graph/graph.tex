@@ -166,13 +166,16 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \end{algorithm}
 
 \begin{algorithm}{Wert des maximalen Matchings}
-	Fehlerwahrscheinlichkeit: $\left(\frac{m}{MOD}\right)^I$
+	Fehlerwahrscheinlichkeit: $\left(\frac{m}{MOD}\right)^I$\newline
+	\begin{methods}
+		\method{max\_matching}{berechnet (nur) den Wert des maximalen Matchings}{\abs{V}^3 \cdot I}
+	\end{methods}
 	\sourcecode{graph/matching.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Allgemeines maximales Matching}
 	\begin{methods}
-		\method{match}{berechnet algemeines Matching}{\abs{E}\*\abs{V}\*\log(\abs{V})}
+		\method{match}{berechnet allgemeines Matching}{\abs{E}\*\abs{V}\*\log(\abs{V})}
 	\end{methods}
 	\sourcecode{graph/blossom.cpp}
 \end{algorithm}
@@ -184,8 +187,11 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\end{methods}
 	\begin{itemize}
 		\item die ersten [0..n) Knoten in \code{adj} sind die linke Seite des Graphen
+		\item Wenn $|V| \approx |E|$, dann ist Dinic schneller ($n\sqrt{n}$ vs. $n^2$)
 	\end{itemize}
 	\sourcecode{graph/maxCarBiMatch.cpp}
+
+	% TODO: wozu? wegkommentieren?
 	\begin{methods}
 		\method{hopcroft\_karp}{berechnet Matching}{\sqrt{\abs{V}}\*\abs{E}}
 	\end{methods}
@@ -209,6 +215,9 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \end{algorithm}
 
 \subsection{Max-Flow}
+Für \textbf{ungerichtete} Kanten, einfach zwei gerichtete einfügen und beim auslesen zusammenfassen.
+Für bipartites Matching nutze Kuhn (Seite \pageref{kuhn})
+
 \optional{
 \subsubsection{Capacity Scaling}
 \begin{methods}
@@ -219,47 +228,64 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 }
 
 \subsubsection{Push Relabel}
+Gut für \textbf{sehr dicht besetzte Graphen}.\newline
+% // TODO: nochmal anschauen
 \begin{methods}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
-	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
+	\method{maxFlow}{berechnet Flow, siehe adj}{\abs{V}^2\*\sqrt{\abs{E}}}
 \end{methods}
 \sourcecode{graph/pushRelabel2.cpp}
 
 \subsubsection{Dinic's Algorithm mit Capacity Scaling}
 \begin{methods}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
-	\method{maxFlow}{doppelt so schnell wie Ford Fulkerson}{\abs{V}^2\cdot\abs{E}}
+	\method{maxFlow}{berechnet Flow, siehe adj}{\abs{V}^2\cdot\abs{E}}
+	\method{decompose}{zerlegt Flow in mehrere Pfade}{\abs{V}\cdot\abs{E}}
 \end{methods}
-Unit-Graph (jeder Knoten hat nur eine Ein-/Ausgehende Kante mit Kapazität 1)
+\textbf{Unit-Graph} (jeder Knoten hat nur eine Ein-/Ausgehende Kante mit Kapazität 1)
 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{V}})$.
 Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \sourcecode{graph/dinicScaling.cpp}
 
-\optional{
 \subsubsection{Anwendungen}
 \begin{itemize}
-	\item \textbf{Maximum Edge Disjoint Paths}\newline
-	Finde die maximale Anzahl Pfade von $s$ nach $t$, die keine Kante teilen.
-	\begin{enumerate}
-		\item Setze $s$ als Quelle, $t$ als Senke und die Kapazität jeder Kante auf 1.
-		\item Der maximale Fluss entspricht den unterschiedlichen Pfaden ohne gemeinsame Kanten.
-	\end{enumerate}
-	\item \textbf{Maximum Independent Paths}\newline
-	Finde die maximale Anzahl an Pfaden von $s$ nach $t$, die keinen Knoten teilen.
-	\begin{enumerate}
-		\item Setze $s$ als Quelle, $t$ als Senke und die Kapazität jeder Kante \emph{und jedes Knotens} auf 1.
-		\item Der maximale Fluss entspricht den unterschiedlichen Pfaden ohne gemeinsame Knoten.
-	\end{enumerate}
 	\item \textbf{Min-Cut}\newline
 	Der maximale Fluss ist gleich dem minimalen Schnitt.
-	Bei Quelle $s$ und Senke $t$, partitioniere in $S$ und $T$.
-	Zu $S$ gehören alle Knoten, die im Residualgraphen von $s$ aus erreichbar sind (Rückwärtskanten beachten).
+	\begin{enumerate}
+		\item Bei Quelle $s$ und Senke $t$, partitioniere in $S$ und $T$.
+		\item Zu $S$ gehören alle Knoten, die im Residualgraphen von $s$ aus erreichbar sind (Rückwärtskanten beachten).
+	\end{enumerate}
+
+	\item \textbf{Maximum Edge/Node Disjoint Paths}\newline
+	Finde die maximale Anzahl Pfade von $s$ nach $t$, die keine Kante/Knoten teilen.
+	\begin{enumerate}
+		\item Setze $s$ als Quelle, $t$ als Senke und die Kapazität jeder Kante auf 1.
+		\item Knoten: aufteilen in Eingangsknoten und Ausgangsknoten mit Cap-1-Kapazität.
+		\item Der maximale Fluss entspricht den unterschiedlichen Pfaden ohne gemeinsame Kanten.
+	\end{enumerate}
+
+	\item \textbf{Minimum Flow}\newline
+	Jede Edge hat minimum Flow (demands)
+	\begin{itemize}
+		\item $t \overset{\infty}\to s$, insert new $s'$ and $t'$, 
+		minimum demands $u \overset{d}\to v$ get extracted by $s' \overset{+d}\to v$ and $u \overset{+d}\to t'$
+		\item flow can be reconstructed with $flow + d$
+		\item s' has to be saturated for flow to be valid
+		\item Binary search $\infty$ to find minimum necessary flow
+	\end{itemize}
+	
+
+	\item \textbf{Assignment Problem}
+	NxN-Feld mit Werten auf jedem Feld. Finde Belegung, sodass in jeder Zeile und Spalte je genau ein Stein liegt.
+	\begin{itemize}
+		\item MinCostMaxFlow, vollständiger bipartiter Graph: links Zeilen, rechts Spalten, Cap 1, Cost übernehmen.
+	\end{itemize}
 \end{itemize}
-}
 
 \begin{algorithm}{Min-Cost-Max-Flow}
 	\begin{methods}
-		\method{mincostflow}{berechnet Fluss}{\abs{V}^2\cdot\abs{E}^2}
+		\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein. Negative Kosten erlaubt.}{1} % TODO: negative Zyklen nicht erlaubt, für decomp?
+		\method[asume $\O(F (n+m) \log n)$]{run}{berechnet maximalen Fluss F mit minimalen Kosten}{\abs{V}\cdot\abs{E}\cdot F}
 	\end{methods}
 	\sourcecode{graph/minCostMaxFlow.cpp}
 \end{algorithm}

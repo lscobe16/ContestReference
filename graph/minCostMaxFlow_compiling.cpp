@@ -1,3 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+
+using z = int;
+using vz = vector<z>;
+using vb = vector<bool>;
+using vvz = vector<vz>;
+using pzz = pair<z, z>;
+using vpzz = vector<pzz>;
+using vvpzz = vector<vpzz>;
+z INF = 1e18;
+
+#define au auto&&
+#define fe(x...) for(au x)
+
+#define in(x...) x; [](au... a){((cin>>a), ...);}(x);
+#define inv(v, n) v(n); fe(_:v){in(_)}
+
+
+
 struct MinCostFlow {
 	struct edge {
 		z to, f, cost;
@@ -11,9 +33,9 @@ struct MinCostFlow {
 	MinCostFlow(z n, z source, z target) :
 		n(n), adj(n), s(source), t(target) {};
 
-	void addEdge(z u, z v, z cap, z cost) {
+	void addEdge(z u, z v, z c, z cost) {
 		adj[u].push_back(E.size());
-		E.push_back({v, cap, cost});
+		E.push_back({v, c, cost});
 		adj[v].push_back(E.size());
 		E.push_back({u, 0, -cost});
 	}
@@ -29,7 +51,6 @@ struct MinCostFlow {
 		pref[s] = s;
 		inQ[s] = true;
 
-		// runs infinitely if there is a cost-negative cycle
 		while (!Q.empty()) {
 			z cur = Q.front(); Q.pop();
 			inQ[cur] = false;
@@ -58,9 +79,25 @@ struct MinCostFlow {
 			E[con[u] ^ 1].f += w;
 	}}
 
-	void run() { // successive shortest path
+	void minCostFlow() { // successive shortest path
 		con.assign(n, 0);
 		maxFlow = minCost = 0;
 		while (spfa()) extend();
+}};
+
+// tested on: https://open.kattis.com/problems/mincostmaxflow
+int32_t main() {
+	cin.tie(0)->sync_with_stdio(0);
+	
+	z in(n, m, s, t);
+	MinCostFlow F(n, s, t);
+
+	for (z i = 0; i < m; i++) {
+		z in(a, b, c, w);
+		F.addEdge(a, b, c, w);
 	}
-};
+
+	F.minCostFlow();
+
+	cout << F.maxFlow << " " << F.minCost << endl;
+}
