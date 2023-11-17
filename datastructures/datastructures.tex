@@ -37,7 +37,8 @@
 	\sourcecode{datastructures/treap3.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Range Minimum Query}
+\begin{algorithm}{Range Minimum Query / Sparse Table}
+	\label{sparse}
 	\begin{methods}
 		\method{init}{baut Struktur auf}{n\*\log(n)}
 		\method{queryIdempotent}{Index des Minimums in [l, rex)}{1}
@@ -71,8 +72,8 @@
 	Hier nur für lower envelopes.
 	Um aus einem lower envelope einen upper envelope zu machen (oder umgekehrt), einfach beim Einfügen der Geraden $m$ und $b$ negieren.\\
 	\begin{methods}
-		\method[amort. $\O{1}$ bzw. amort. $\O{\log(n)}$]{add}{$M := M \cup \{x \mapsto mx+b\}$}{}
-		\method[amort. $\O{1}$ bzw. $\O{\log(n)}$]{query}{$\min \{f(x) \mid f \in M\}$}{}
+		\method[amort. $\O(1)$ bzw. amort. $\O(\log(n))$]{add}{$M := M \cup \{x \mapsto mx+b\}$}{}
+		\method[amort. $\O(1)$ bzw. $\O(\log(n))$]{query}{$\min \{f(x) \mid f \in M\}$}{}
 	\end{methods}
 	\sourcecode{datastructures/monotonicConvexHull.cpp}
 	\columnbreak

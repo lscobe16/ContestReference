@@ -1,7 +1,7 @@
 struct LCA {
 	z n, idx=0;
 	vz t2n, n2t, dep; // n2t = first time
-	SparseTable *st; // -> 1.5
+	SparseTable *st; // Seite @\pageref{sparse}@
 
 	// computes @\greenBox{euler tour}@  in t2n
 	void dfs(vvz& G, z u, z p=-1, z d=0) {
