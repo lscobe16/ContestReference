@@ -1,3 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+
+using z = int;
+using vz = vector<z>;
+using vvz = vector<vz>;
+using pzz = pair<z, z>;
+using vpzz = vector<pzz>;
+using vvpzz = vector<vpzz>;
+using vb = vector<bool>;
+z INF = 1e18;
+
+#define au auto&&
+#define fe(x...) for(au x)
+
+#define in(x...) x; [](au... a){((cin>>a), ...);}(x);
+#define inv(v, n) v(n); fe(_:v){in(_)}
+
+
+
 template<bool persistent=0>
 struct segT {
     z sz; //always initialize!
@@ -81,3 +103,6 @@ struct segT {
         A curr_agg = e;
         return lower_bound(l, rex, 0, sz, root, curr_agg, id, p, rtl) + !rtl;
 }};
+
+
+// TODO: test
