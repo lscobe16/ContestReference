@@ -8,7 +8,7 @@ struct SparseTable {
 	
 	SparseTable(vz &vec): 
 		n(vec.size()), a(vec), st(__lg(n)+1, vz(n)) {
-		iota(be(st[0]), 0);
+		iota(st[0].begin(), st[0].end(), 0);
 		for (z j = 0; (2 << j) <= n; j++) {
 			for (z i = 0; i + (2 << j) <= n; i++) {
 				st[j + 1][i] = better(st[j][i], st[j][i + (1 << j)]);
