@@ -48,6 +48,7 @@ z kuhn(z l) { // l = #Knoten links
 
 
 // tested on: https://judge.yosupo.jp/problem/bipartitematching
+// is too slow for kuhl_killer, because it has n^2 runtime there, but dinic has n^1.5
 int32_t main() {
 	z in(L, R, M);
 	
