@@ -46,7 +46,7 @@
 
 \begin{algorithm}{Heavy-Light Decomposition}
 	\begin{methods}
-		\method{on\_path}{ruft $\O{\log{\abs{V}}}$ Mal $f(l, rex)$ auf, sodass $u$-$v$-Pfad genau abgedeckt\\&
+		\method{on\_path}{ruft $\O(\log{\abs{V}})$ Mal $f(l, rex)$ auf, sodass $u$-$v$-Pfad genau abgedeckt\\&
 		Aufrufe unsortiert! Also ggf. per f extracten und dann sortieren}{}
 		\method{on\_subtree}{ruft 1 Mal $f(l, rex)$ auf, sodass Subtree unter $u$ genau abgedeckt}{}
 		\method{get\_lca}{= on\_path(., ., []\{\})}{}
