@@ -262,7 +262,7 @@
 \subsection{Tipps \& Tricks}
 
 \begin{itemize}
-	\item Run Time Error:
+	\item \textbf{Run Time Error}:
 	\begin{itemize}
 		\item Stack Overflow? Evtl. rekursive Tiefensuche auf langem Pfad?
 		\item Array-Grenzen überprüfen. Indizierung bei $0$ oder bei $1$ beginnen?
@@ -270,13 +270,21 @@
 		\item Evtl. Memory Limit Exceeded?
 	\end{itemize}
 	
-	\item Strings:
+	\item \textbf{Strings}:
 	\begin{itemize}
 		\item Soll \codeSafe{"aa"} kleiner als \codeSafe{"z"} sein oder nicht?
 		\item bit \code{0x20} beeinflusst Groß-/Kleinschreibung.
 	\end{itemize}
 	
-	\item Gleitkommazahlen:
+	\item \textbf{Zeilenbasierte Eingabe}:
+	\begin{itemize}
+		\item \code{getline(cin, str)} liest Zeile ein.
+		\item Wenn vorher \code{cin >> ...} benutzt, dann zuerst Newline mit \code{getline(cin, str)} fressen.
+		\item Zeilen weiter aufteilen: \code{stringstream(str) >> ...}
+		\item Bis zum Ende einlesen: \code{while(cin >> a >> b >> ...)}
+	\end{itemize}
+
+	\item \textbf{Gleitkommazahlen}:
 	\begin{itemize}
 		\item \code{NaN}? Evtl. ungültige Werte für mathematische Funktionen, z.B. \mbox{\code{acos(1.00000000000001)}}?
 		\item Falsches Runden bei negativen Zahlen? Abschneiden $\neq$ Abrunden!
@@ -284,7 +292,7 @@
 		\item Kann \code{-0.000} ausgegeben werden?
 	\end{itemize}
 
-	\item Wrong Answer:
+	\item \textbf{Wrong Answer}:
 	\begin{itemize}
 		\item Lies Aufgabe erneut. Sorgfältig!
 		\item Compile Warnings anschauen!
@@ -309,7 +317,7 @@
 		\item Unsicher bei benutzten STL-Funktionen?
 	\end{itemize}
 
-	\item Interaktive Aufgaben:
+	\item \textbf{Interaktive Aufgaben}:
 	\begin{itemize}
 		\item Vor Einlesen Ausgabe flushen
 		\item Nicht zu faul sein, zu testen
