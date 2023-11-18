@@ -12,7 +12,9 @@
 	\tab p should be increasing, i.e.  p(a1) <= p(agg(a1, a2))\\
 	Right to left:\\
 	\tab largest k in [l, rex] such that p(agg([k, rex))), or sth <0 if impossible\\
-	\tab p should be decreasing, i.e.  p(agg(a1, a2)) <= p(a2)
+	\tab p should be decreasing, i.e.  p(agg(a1, a2)) <= p(a2)\\
+	\textbf{Memory bei Persistent}: updates $\cdot$ 2 $\cdot$ log2(sz) $\cdot$ sizeof(segT::node)\\
+	\tab Manchmal $\cdot$2 aufm Judge (diesmal: ja/nein)
 	\sourcecode{datastructures/segT.cpp}
 \end{algorithm}
 

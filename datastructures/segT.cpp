@@ -1,4 +1,4 @@
-struct segT {
+struct segT { @\warn{bei persistent vorm Abschreiben memory berechnen!}@
     z sz; @\warn{always initialize!}@
 
     using A = z;
@@ -19,20 +19,20 @@ struct segT {
 #define N v[n]
     z root = 0;
 
-    z set(z n, node x) {
+    z set(@\green{z n, }@node x) {
         return @\green{n ? v[n]=x, n : }\red(@v.push_back(x), v.size()-1@\red)@;
     }
     z apply(z n, U u, z rangesize) {
-        return set(n, {N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
+        return set(@\green{n, }@{N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
     }
-    z update(z a, z bex, z l, z rex, z n, U u) {
-        if(bex <= l || rex <= a) return n;
-        if(a <= l && rex <= bex) return apply(n, u, rex - l);
-        z m = (l + rex) / 2;
-        z nl = update(a, bex, l, m, apply(N.l, N.lazy, m - l), u);
-        z nr = update(a, bex, m, rex, apply(N.r, N.lazy, rex - m), u);
-        return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg)});
-    }
+	z update(z a, z bex, z l, z rex, z n, U u, U lazy) {
+		if(bex <= l || rex <= a) return apply(n, lazy, rex - l);
+		if(a <= l && rex <= bex) return apply(n, comp(u, lazy), rex - l);
+		z m = (l+rex)/2;
+		z nl = update(a, bex, l, m, N.l, u, comp(lazy, N.lazy));
+		z nr = update(a, bex, m, rex, N.r, u, comp(lazy, N.lazy));
+		return set(@\green{n, }@{nl, nr, aggr(v[nl].agg, v[nr].agg)});
+	}
     A query(z a, z bex, z l, z rex, z n) {
         if(bex <= l || rex <= a) return e;
         if(a <= l && rex <= bex) return N.agg;

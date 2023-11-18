@@ -49,14 +49,23 @@ struct segT {
     z apply(z n, U u, z rangesize) {
         return set(n, {N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
     }
-    z update(z a, z bex, z l, z rex, z n, U u) { //TODO: make update and apply return nodes (that need to be pushed into v manually, if desired)!!?
+	/*old version (if persistent: 1/3 more memory. TODO: Delete when tested)
+    z update(z a, z bex, z l, z rex, z n, U u) {
         if(bex <= l || rex <= a) return n;
         if(a <= l && rex <= bex) return apply(n, u, rex - l);
         z m = (l + rex) / 2;
         z nl = update(a, bex, l, m, apply(N.l, N.lazy, m - l), u); //here, it's important that v[0] is an empty node
         z nr = update(a, bex, m, rex, apply(N.r, N.lazy, rex - m), u);
         return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg)});
-    }
+    }*/
+	z update(z a, z bex, z l, z rex, z n, U u, U lazy) { //TODO: make update and apply return nodes (that need to be pushed into v manually, if desired)!!?
+		if (bex <= l || rex <= a) return apply(n,lazy,rex-l);
+		if (a <= l && rex <= bex) return apply(n, comp(u, lazy), rex-l);
+		z m = (l+rex)/2;
+		z nl = update(a, bex, l, m, N.l, u, comp(lazy, N.lazy)); //here, it's important that v[0] is an empty node
+		z nr = update(a, bex, m, rex, N.r, u, comp(lazy, N.lazy));
+		return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg)});
+	}
     A query(z a, z bex, z l, z rex, z n) {
         if(bex <= l || rex <= a) return e;
         if(a <= l && rex <= bex) return N.agg;
