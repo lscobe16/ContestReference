@@ -21,7 +21,7 @@ au operator+(ostream& o, au t) {return o << t << '\n';}
 
 @\opt{z INF = 1e18;}@ //max z = ca. 9e18
 
-@\optE{\#define dbg(x) (cerr<<\_\_LINE\_\_<<": \textbackslash}\optE{t"\#x}\opt{" = ")+x;}@
+@\optE{\#define dbg(x) cerr<<\_\_LINE\_\_<<": \textbackslash}\optE{t"\#x}\opt{" = "}\optE{<<(x)<<"\textbackslash n";}@
 
 int32_t main() {
     @\opt{cin.tie(0)->sync_with_stdio(0);}@
