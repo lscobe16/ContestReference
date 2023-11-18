@@ -10,7 +10,7 @@
 
 \begin{algorithm}{Zykel Erkennung}
 	\begin{methods}
-		\method{cycleDetection}{findet Zyklus von $x_0$ und Länge in $f$}{start+len}
+		\method{cycleDetection}{findet Zyklus in $f$-Successor-Graph von $x_0$ aus}{startI+len}
 	\end{methods}
 	\sourcecode{math/cycleDetection.cpp}
 \end{algorithm}
@@ -32,8 +32,8 @@
 \method{modpow}{berechnet $b^e \bmod M$}{\log(e)}
 	\sourcecode{math/modMulPow.cpp}
 \begin{itemize}
+	\item modmul ca. 1,3x - 2x schneller als \code{__int128}
 	\item für $a > 10^9$ \code{__int128} oder \code{modmul} benutzten!
-	\item modmul ca. 1,3x - 2x schneller
 \end{itemize}
 
 \begin{algorithm}{ggT, kgV, erweiterter euklidischer Algorithmus}

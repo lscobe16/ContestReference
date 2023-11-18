@@ -4,8 +4,8 @@ pzz cycleDetection(z x0, au f) { // f: z -> z
 		if (power == len) {
 			power *= 2, len = 0, a = b;
 	}}
-	z start = 0; a = x0; b = x0;
+	z startI = 0; a = x0; b = x0;
 	for (z i = 0; i < len; i++) b = f(b);
-	while (a != b) a = f(a), b = f(b), start++;
-	return {start, len};
+	while (a != b) a = f(a), b = f(b), startI++;
+	return {startI, len};
 }

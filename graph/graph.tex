@@ -248,6 +248,15 @@ $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{V}})$.
 Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \sourcecode{graph/dinicScaling.cpp}
 
+\begin{algorithm}{Min-Cost-Max-Flow}
+	\begin{methods}
+		\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein. Negative Kosten erlaubt.}{1} % TODO: negative Zyklen nicht erlaubt, für decomp?
+		\method{run}{berechnet maximalen Fluss F mit minimalen Kosten}{\abs{V}\cdot\abs{E}\cdot F}
+		& Chris: assume $\O(F (n+m) \log n)$
+	\end{methods}
+	\sourcecode{graph/minCostMaxFlow.cpp}
+\end{algorithm}
+
 \subsubsection{Anwendungen}
 \begin{itemize}
 	\item \textbf{Min-Cut}\newline
@@ -277,20 +286,11 @@ Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 	
 
 	\item \textbf{Assignment Problem}
-	NxN-Feld mit Werten auf jedem Feld. Finde Belegung, sodass in jeder Zeile und Spalte je genau ein Stein liegt.
+	NxN-Feld mit Werten auf jedem Feld. Finde minimale schwere Belegung, sodass in jeder Zeile und Spalte je genau ein Stein liegt.
 	\begin{itemize}
 		\item MinCostMaxFlow, vollständiger bipartiter Graph: links Zeilen, rechts Spalten, Cap 1, Cost übernehmen.
 	\end{itemize}
 \end{itemize}
-
-\begin{algorithm}{Min-Cost-Max-Flow}
-	\begin{methods}
-		\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein. Negative Kosten erlaubt.}{1} % TODO: negative Zyklen nicht erlaubt, für decomp?
-		\method{run}{berechnet maximalen Fluss F mit minimalen Kosten}{\abs{V}\cdot\abs{E}\cdot F}
-		& Chris: assume $\O(F (n+m) \log n)$
-	\end{methods}
-	\sourcecode{graph/minCostMaxFlow.cpp}
-\end{algorithm}
 
 \begin{algorithm}[optional]{TSP}
 	\begin{methods}
