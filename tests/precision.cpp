@@ -1,6 +1,5 @@
 #include <cfloat>
-
-int main() {
+int32_t main() {
 	cout << "Mode: " << FLT_EVAL_METHOD << endl;
 	double a = atof("1.2345678");
 	double b = a*a;

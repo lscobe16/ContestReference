@@ -1,49 +1,47 @@
 \section{Tests}
-Dieser Abschnitt enthält lediglich Dinge die während der Practicesession getestet werden sollten!
+Dieser Abschnitt enthält lediglich Dinge die während der Practice Session getestet werden sollten!
 
 \subsection{GCC}
 \begin{itemize}
-	\item sind c++14 Features vorhanden?
-	\item sind c++17 Features vorhanden?
-	\item sind c++20 Features vorhanden?
-	\item kompiliert dieser Code:
+	\item Sind C++14 Features vorhanden?
+	\item Sind C++17 Features vorhanden?
+	\item Sind C++20 Features vorhanden?
+% 	\item Kompiliert dieser Code:
+% \end{itemize}
+% \sourcecode{tests/gcc5bug.cpp}
+% \begin{itemize}
+	\item Wie groß ist RAND\_MAX?
+	\item Funktioniert \code{__int128}?
+	\item Wie groß ist \code{sizeof(char*)}?
+	\item Funktionieren Pragmas?
+	\item Funktionieren \code{constexpr} zur Compilezeit (+Zeitlimit)?
+	\item Funktioniert \code{clock()}?
+	\item Funktioniert \code{random_device}? (und gib es unterschiedliche Ergebnisse?)
 \end{itemize}
-\sourcecode{tests/gcc5bug.cpp}
-\begin{itemize}
-	\item funktioniert \code{__int128}?
-	\item funktionieren Pragmas?
-	\item funktionieren \code{constexpr} zur Compilezeit (+Zeitlimit)?
-	\item wie groß ist \code{sizeof(char*)}?
-	\item wie groß ist RAND\_MAX?
-	\item funktioniert \code{random_device}? (und gib es unerschiedliche Ergebnisse?)
-	\item funktioniert \code{clock()}?
-	\item Was ist der Faktor für den Speicher des segT? (Seite \pageref{segT})
-\end{itemize}
-\sourcecode{datastructures/segT.cpp}
-\sourcecode{tests/segTSize.cpp}
 
 % \subsection{Java}
 % \begin{itemize}
-% 	\item startet eclipse?
-% 	\item funktionieren Java8 feature (lambdas)?
+% 	\item Startet eclipse?
+% 	\item Funktionieren Java8 feature (lambdas)?
 % \end{itemize}
 
 \subsection{IDEs}
 \begin{itemize}
-	\item funktioniert CLion?
-	\item funktioniert PyCharm?
-	\item funktioniert VS Code? (als Backup)
+	\item Funktioniert CLion?
+	\item Funktioniert PyCharm?
+	\item Funktioniert VS Code? (als Backup)
 \end{itemize}
 
 \subsection{Judge}
 \begin{itemize}
-	\item ist der Checker casesensitive?
-	\item wie werden zusätzliches Whitespacecharacter bei sonst korrektem Output behandelt?
-	\item vergleiche ausführungszeit auf dem judge und lokal (z.b. mit Primzahl Sieb)
-	\item wird Memory Exceeded als RTE angezeigt?
-	\item wie viele rekursive (DFS)-Aufrufe passen auf den Stack?
+	\item Wie sehen \textbf{Testing Tool}s aus? Wie bedient man sie?
+	\item Ist der Checker case sensitive?
+	\item Wird Memory Exceeded als RTE angezeigt?
+	\item Wie viele rekursive (DFS)-Aufrufe passen auf den Stack?
+	\item Vergleiche ausführungszeit auf dem Judge und lokal (z.b. mit Primzahl Sieb)
+	\item Wie werden zusätzliches Whitespace character bei sonst korrektem Output behandelt?
 \end{itemize}
-\sourcecode{tests/whitespace.cpp}
+% \sourcecode{tests/whitespace.cpp}
 
 \subsection{Precision}
 \begin{itemize}
@@ -56,10 +54,18 @@ Dieser Abschnitt enthält lediglich Dinge die während der Practicesession getes
 \end{itemize}
 \sourcecode{tests/precision.cpp}
 
-\begin{algorithm}{Compiletime Computations}
-	\begin{itemize}
-		\item überprüfen ob Compilezeit Berechnungen erlaubt sind!
-		\item braucht \code{c++14} oder höher!
-	\end{itemize}
-	\sourcecode{other/compiletime.cpp}
-\end{algorithm}
+\subsection{Compiletime Computations}
+\begin{itemize}
+	\item Überprüfen ob Compilezeit Berechnungen erlaubt sind! (>=\code{C++14})
+\end{itemize}
+\sourcecode{other/compiletime.cpp}
+
+\columnbreak
+\subsection{Time Macro}
+\sourcecode{other/timeMacro.cpp}
+
+
+\subsection{Speicher bei segT}
+Was ist der Faktor für den Speicher des segT? (Seite \pageref{segT} und unten)
+\sourcecode{tests/segTSize.cpp}
+\sourcecode{datastructures/segT.cpp}
