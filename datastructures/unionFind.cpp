@@ -1,6 +1,6 @@
 struct union_find {
-    vz e; //<0: -(maximum possible) height/@\yellow{size}@, else: parent
-    @\green{vpzz st{};}@
+    vz e; // <0: -rank(~height)/@\yellow{size}@, >=0: parent
+    @\green{vpzz st{};}@ @\greenBox{rollback}@
 
     union_find(z sz) : e(sz, -1) {}
 
