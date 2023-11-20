@@ -145,6 +145,10 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \end{algorithm}
 
 \begin{algorithm}{2-SAT}
+	\begin{methods}
+		\method{solvable}{solves the 2-SAT, returns wether successful}{vars + clauses}
+		& Ausgabe: \code{sccs}, {idx}
+	\end{methods}
 	\sourcecode{graph/2sat.cpp}
 \end{algorithm}
 
