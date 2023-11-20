@@ -27,5 +27,4 @@ struct connect {
 			          &lct.nodes[edges[id].second]) == id) {
 			lct.cut(&lct.nodes[edges[id].first], &lct.nodes[id + n]);
 			lct.cut(&lct.nodes[edges[id].second], &lct.nodes[id + n]);
-	}}
-};
+}}};
