@@ -1,21 +1,22 @@
-using path = pair<ll, int>; //dist, destination
+// adj[i] = {(j, c(e)) | (i, j) = e in E}
+using pzz = pair<z, z>; //dist, destination
+@\green{pair<}@vz@\green{, vz>}@ dijkstra(vvpzz& adj, z start) {
+	priority_queue<pzz, vpzz, greater<pzz>> Q;
+	vz dist(adj.size(), INF)@\green{, prev(adj.size(), -1)}@;
+	dist[start] = 0; Q.emplace(0, start);
 
-void dijkstra(const vector<vector<path>>& adj, int start) {
-	priority_queue<path, vector<path>, greater<path>> pq;
-	vector<ll> dist(sz(adj), INF);
-	vector<int> prev(sz(adj), -1);
-	dist[start] = 0; pq.emplace(0, start);
-
-	while (!pq.empty()) {
-		auto [dv, v] = pq.top(); pq.pop();
-		if (dv > dist[v]) continue; // WICHTIG!
-
-		for (auto [du, u] : adj[v]) {
-			ll newDist = dv + du;
-			if (newDist < dist[u]) {
-				dist[u] = newDist;
-				prev[u] = v;
-				pq.emplace(dist[u], u);
+	while (Q.size()) {
+		auto [du, u] = Q.top(); Q.pop();
+		if (du > dist[u]) continue; // lazy decreaseKey
+		fe([v, c] : adj[u]) {
+			if (du + c < dist[v]) {
+				dist[v] = du + c;
+				@\green{prev[v] = u;}@
+				Q.emplace(dist[v], v);
 	}}}
-	//return dist, prev;
+	return @\greenE{\{}@dist@\greenE{, prev\}}@;
 }
+
+@\green{vz path = {{t}}; z c = t;}@
+@\green{while (c != s) path.push_back(c = prev[c]);}@
+@\green{reverse(path.begin(), path.end());}@
