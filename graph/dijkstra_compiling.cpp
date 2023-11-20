@@ -49,6 +49,7 @@ pair<vz, vz> dijkstra(vvpzz& adj, z start) {
 	return {dist, prev};
 }
 
+// tested on: https://judge.yosupo.jp/problem/shortest_path
 int32_t main() {
 	z in(n, m, s, t);
 	vvpzz G(n);
