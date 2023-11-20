@@ -1,16 +1,6 @@
-bool compY(pt a, pt b) {
-	return (imag(a) == imag(b)) ? real(a) < real(b)
-	                            : imag(a) < imag(b);
-}
-
-bool compX(pt a, pt b) {
-	return (real(a) == real(b)) ? imag(a) < imag(b)
-	                            : real(a) < real(b);
-}
-
 double shortestDist(vector<pt>& pts) { // sz(pts) > 1
 	set<pt, bool(*)(pt, pt)> status(compY);
-	sort(all(pts), compX);
+	sort(pts.begin(), pts.end(), compX);
 	double opt = 1.0/0.0, sqrtOpt = 1.0/0.0;
 	auto left = pts.begin(), right = pts.begin();
 	status.insert(*right); right++;

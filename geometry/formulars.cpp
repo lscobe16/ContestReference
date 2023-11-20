@@ -3,6 +3,13 @@
 using pt = complex<double>;
 using vpt = vector<pt>;
 
+bool compY(pt a, pt b) {
+	return pair{imag(a), real(a)} < pair{imag(b), real(b)};
+}
+bool compX(pt a, pt b) {
+	return pair{real(a), imag(a)} < pair{real(b), imag(b)};
+}
+
 constexpr double PIU = acos(-1.0l); // PIL < PI < PIU
 constexpr double PIL = PIU-2e-19l;
 
