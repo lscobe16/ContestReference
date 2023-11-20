@@ -4,7 +4,7 @@ struct sat2 {
 
 	sat2(int vars) : n(vars*2), adj(vars*2) {};
 
-	static int var(int i) {return i << 1;} // use this!
+	static int var(int i) {return i*2;} // use this!
 
 	void addImpl(int a, int b) {
 		adj[a].push_back(b);
@@ -19,7 +19,7 @@ struct sat2 {
 	void addNand(int a, int b) {addOr(1^a, 1^b);}
 
 	bool solvable() {
-		scc(); //scc code von oben
+		scc(); // @\page{scc}@
 		for (int i = 0; i < n; i += 2) {
 			if (idx[i] == idx[i + 1]) return false;
 		}
