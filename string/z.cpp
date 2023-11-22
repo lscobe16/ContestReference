@@ -1,10 +1,10 @@
-vz Z(const string& s) {
+vz Z(string s) {
     z n = s.size();
-    vz z(n);
+    vz Z(n, n);
     for (z i = 1, x = 0; i < n; i++) {
-        z[i] = max(0, min(z[i - x], x + z[x] - i));
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
-            x = i, z[i]++;
+        Z[i] = max(0, min(Z[i - x], x + Z[x] - i));
+        while (i + Z[i] < n && s[Z[i]] == s[i + Z[i]]) {
+            x = i, Z[i]++;
     }}
-    return z;
+    return Z;
 }
