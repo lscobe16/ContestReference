@@ -1,4 +1,5 @@
 string a, b; //a needs to be set
+// longest[i] = length of longest palindrome centered at i
 vector<int> longest;
 
 //transformes "aa" to ".a.a." to find even length palindromes
