@@ -171,7 +171,13 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\sourcecode{graph/cycleCounting.cpp}
 \end{algorithm}
 
-\columnbreak
+\begin{algorithm}{Topologische Sortiereung}
+	\begin{methods}
+		\method{topoSort}{topologische Sortierung in topo speichern}{\abs{V} + \abs{E}}
+	\end{methods}
+	\sourcecode{graph/topoSort.cpp}
+\end{algorithm}
+
 \begin{algorithm}{Wert des maximalen Matchings}
 	Fehlerwahrscheinlichkeit: $\left(\frac{m}{MOD}\right)^I$\newline
 	\begin{methods}
@@ -187,7 +193,6 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\sourcecode{graph/blossom.cpp}
 \end{algorithm}
 
-\columnbreak
 \begin{algorithm}{Maximal Cardinatlity Bipartite Matching}
 	\label{kuhn}
 	\begin{methods}
@@ -199,9 +204,8 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\end{itemize}
 	\sourcecode{graph/maxCarBiMatch.cpp}
 
-	% TODO: wozu? wegkommentieren?
 	\begin{methods}
-		\method{hopcroft\_karp}{berechnet Matching}{\sqrt{\abs{V}}\*\abs{E}}
+		\method{hopcroft\_karp}{berechnet Matching (kürzer und schneller als Dinic)}{\sqrt{\abs{V}}\*\abs{E}}
 	\end{methods}
 	\sourcecode{graph/hopcroftKarp.cpp}
 \end{algorithm}
