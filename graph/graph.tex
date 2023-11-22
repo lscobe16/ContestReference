@@ -128,6 +128,13 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\input{graph/dfs}
 \end{algorithm}
 
+\begin{algorithm}{Topologische Sortiereung}
+	\begin{methods}
+		\method{topoSort}{topologische Sortierung in topo speichern}{\abs{V} + \abs{E}}
+	\end{methods}
+	\sourcecode{graph/topoSort.cpp}
+\end{algorithm}
+
 \begin{algorithm}{Artikulationspunkte, Brücken und BCC}
 	\begin{methods}
 		\method{find}{berechnet Artikulationspunkte, Brücken und BCC}{\abs{V}+\abs{E}}
@@ -169,13 +176,6 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 		\item jeder Zyklus ist das xor von einträgen in \code{base}.
 	\end{itemize}
 	\sourcecode{graph/cycleCounting.cpp}
-\end{algorithm}
-
-\begin{algorithm}{Topologische Sortiereung}
-	\begin{methods}
-		\method{topoSort}{topologische Sortierung in topo speichern}{\abs{V} + \abs{E}}
-	\end{methods}
-	\sourcecode{graph/topoSort.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Wert des maximalen Matchings}
