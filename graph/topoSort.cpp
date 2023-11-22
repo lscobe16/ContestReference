@@ -3,7 +3,7 @@ z f = 0, n;
 vz fin, topo; // topo: edges go from left to right
 
 void dfs(z u) {
-	@\yellow{fin[u] = -1;}@  @\yellowBox{detect cycle}@
+	@\yellow{fin[u] = -1;}@  @\yellowBox{check for acyclicity}@
 	fe(v:adj[u]) if (!fin[v]) dfs(v);
 		@\yellow{else if (fin[v] == -1) return;}@
 	fin[u] = ++f;
