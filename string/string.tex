@@ -14,7 +14,7 @@
 	Suchen: Z-Algorithmus auf \code{P\$S} ausführen, Positionen mit $z_i=\abs{P}$ zurückgeben
 	\sourcecode{string/z.cpp}
 	\begin{methods}[ll]
-		$p_i\coloneqq$ Längstes Präfix von $s_0\cdots s_{n-1}$ das auch Suffix davon ist & \runtime{n}
+		$p_i\coloneqq$ Längstes echtes Präfix von $s_0\cdots s_i$ das auch Suffix davon ist  ($p_0=0$)& \runtime{n}
 	\end{methods}
 	\sourcecode{string/p.cpp}
 \end{algorithm}
