@@ -7,12 +7,16 @@
 	\sourcecode{string/kmp.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Z-Algorithmus}
+\begin{algorithm}{Z- und P-Funktion}
 	\begin{methods}[ll]
 		$z_i\coloneqq$ Längstes gemeinsames Präfix von $s_0\cdots s_{n-1}$ und $s_i\cdots s_{n-1}$ & \runtime{n}
 	\end{methods}
 	Suchen: Z-Algorithmus auf \code{P\$S} ausführen, Positionen mit $z_i=\abs{P}$ zurückgeben
 	\sourcecode{string/z.cpp}
+	\begin{methods}[ll]
+		$p_i\coloneqq$ Längstes Präfix von $s_0\cdots s_{n-1}$ das auch Suffix davon ist & \runtime{n}
+	\end{methods}
+	\sourcecode{string/p.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Rolling Hash}
