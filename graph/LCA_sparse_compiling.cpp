@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define be(v) v.begin(), v.end()
-
 using z = long long;
 using vz = vector<z>;
 using vvz = vector<vz>;

@@ -1,8 +1,8 @@
 vector<pt> convexHull(vector<pt> pts){
-	sort(be(pts), [](au a, au b){
+	sort(pts.begin(), pts.end(), [](au a, au b){
         return pair{a.real(), a.imag()} < pair{b.real(), b.imag()};
 	});
-	pts.erase(unique(be(pts)), @\red{pts.end()}@);
+	pts.erase(unique(pts.begin(), pts.end()), @\red{pts.end()}@);
 	int k = 0;
 	vector<pt> h(2 * pts.size());
 	for (int i = 0; i < pts.size(); i++) {// Untere Hülle
