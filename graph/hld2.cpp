@@ -5,7 +5,7 @@ struct hld {
 	void dfs(z u, z p, vvz &g) {
 		par[u] = p;
 		fe(v : g[u]) if(v!=p) {
-			dfs_sz(v, u, g);
+			dfs(v, u, g);
 			sz[u] += sz[v];
 			au h = g[u][0];
 			if (h==p || sz[v]>sz[h]) swap(v, h);
@@ -15,7 +15,7 @@ struct hld {
 		in[u] = i++;
 		head[u] = h;
 		fe(v : g[u]) if(v!=par[u])
-			dfs_hld(v, v==g[u][0] ? h : v, g);
+			decomp(v, v==g[u][0] ? h : v, g);
 	}
 
 	hld(vvz @\redE{\sout{\&}}@g, z r = 0) {
