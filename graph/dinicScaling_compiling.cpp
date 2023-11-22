@@ -5,11 +5,11 @@ using namespace std;
 
 using z = int;
 using vz = vector<z>;
-using vb = vector<bool>;
 using vvz = vector<vz>;
 using pzz = pair<z, z>;
 using vpzz = vector<pzz>;
 using vvpzz = vector<vpzz>;
+using vb = vector<bool>;
 z INF = 1e18;
 
 #define au auto&&
@@ -17,6 +17,17 @@ z INF = 1e18;
 
 #define in(x...) x; [](au... a){((cin>>a), ...);}(x);
 #define inv(v, n) v(n); fe(_:v){in(_)}
+#define dbg(x) cerr<<__LINE__<<": 	"#x" = "<<(x)<<"\n";
+
+au operator-(ostream& o, au t) {return o << t << ' ';}
+au operator+(ostream& o, au t) {return o << t << '\n';}
+
+#define time(f...) [&](){\
+	auto startT = chrono::high_resolution_clock::now(); \
+	f; \
+	auto stopT = chrono::high_resolution_clock::now(); \
+	return chrono::duration_cast<chrono::milliseconds>(stopT - startT).count();}()
+
 
 
 
@@ -148,5 +159,29 @@ int32_t decomp() {
 		cout << 1 << " ";
 		fe(e:p.first) cout << (e->to+1) << " ";
 		cout << "\n";
+	}
+}
+
+// tested on: https://open.kattis.com/problems/maxflow
+int32_t main() {
+	z in(n, m);
+	in(s, t);
+	adj.resize(n);
+
+	for (z i = 0; i < m; i++) {
+		z in(a, b, c);
+		addEdge(a, b, c);
+	}
+
+	z f = maxFlow();
+
+	vector<Edge> E;
+	fe(l:adj) fe(e:l) {
+		if (e.c && e.f) E.push_back(e);
+	}
+
+	cout-n-f+E.size();
+	fe(e:E) {
+		cout-adj[e.to][e.rev].to-e.to+e.f;
 	}
 }
