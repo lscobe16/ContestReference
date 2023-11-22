@@ -30,12 +30,21 @@
 % \end{algorithm}
 
 \subsection{Formeln~~--~\texttt{std::complex}}
+Konstante Laufzeit, wenn nicht anders angegeben.
+\subsubsection{Allgemein}
 \sourcecode{geometry/formulars.cpp}
-\sourcecode{geometry/linesAndSegments.cpp}
-\sourcecode{geometry/sortAround.cpp}
+\subsubsection{Geraden}
+\sourcecode{geometry/lines.cpp}
+\subsubsection{Strecken}
+\sourcecode{geometry/segments.cpp}
+% \sourcecode{geometry/sortAround.cpp} % -> formulas
+\subsubsection{Dreiecke}
 \input{geometry/triangle}
 \sourcecode{geometry/triangle.cpp}
+\subsubsection{Polgone, Polylinien}
+$n := $ Anzahl Eckpunkte
 \sourcecode{geometry/polygon.cpp}
+\subsubsection{Kreise}
 \sourcecode{geometry/circle.cpp}
 
 \subsection{Formeln - 3D}

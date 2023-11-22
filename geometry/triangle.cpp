@@ -12,7 +12,7 @@ double area(double a, double b, double c) {
 	return sqrt(s * (s-a) * (s-b) * (s-c));
 }
 
-// Zentrum des größten Kreises im Dreiecke
+// Zentrum des größten Kreises im Dreieck
 pt inCenter(pt a, pt b, pt c) {
 	double x = abs(a-b), y = abs(b-c), z = abs(a-c);
 	return (y*a + z*b + x*c) / (x+y+z);
@@ -27,10 +27,11 @@ pt circumCenter(pt a, pt b, pt c) {
 	return a + d / cross(b, c) / 2.0;
 }
 
+int sgn(int x) {return x<0 ? -1 : x>0 ? 1 : 0;}
 //  1 => p außerhalb Kreis durch a,b,c
 //  0 => p auf Kreis durch a,b,c
 // -1 => p im Kreis durch a,b,c
-int insideOutCenter(pt a, pt b, pt c, pt p) {// braucht lll
+int insideOutCenter(pt a, pt b, pt c, pt p) {// braucht _uint128
 	return sgn(imag((c-b)*conj(p-c)*(a-p)*conj(b-a)));
 }
 
