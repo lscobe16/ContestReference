@@ -49,7 +49,7 @@ struct segT {
     z apply(z n, U u, z s) {
         return set(n, {N.l, N.r, app(N.agg, u, s), comp(u, N.lazy)});
     }
-	/*old version (if persistent: 1/3 more memory. TODO: Delete when tested)
+	/*old version (if persistent: 1/3 more memory. TODO: Delete when tested NE!!!: mit dem TODO unten könnte das hier einfacher sein)
     z update(z a, z bex, z l, z rex, z n, U u) {
         if(bex <= l || rex <= a) return n;
         if(a <= l && rex <= bex) return apply(n, u, rex - l);
