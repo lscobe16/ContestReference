@@ -3,11 +3,11 @@ struct segT { @\warn{bei persistent vorm Abschreiben memory berechnen!}@
 
     using A = z;
     using U = z;
-    A e = 0;
-    U id = 0;
-    A aggr(A a, A b) {return a+b;}
-    A app(A a, U u, z s) {return a+u*s;}
-    U comp(U later, U first) {return later+first;}
+    A e = INF;
+    U id = -1;
+    A aggr(A a, A b) {return min(a, b);}
+    A app(A a, U u, z s) {return u!=id ? u : a;} // s: rangesize
+    U comp(U later, U first) {return later!=id ? later : first;}
 
     struct node {
         int32_t l, r;
@@ -22,8 +22,8 @@ struct segT { @\warn{bei persistent vorm Abschreiben memory berechnen!}@
     z set(@\green{z n, }@node x) {
         return @\green{n ? v[n]=x, n : }\red(@v.push_back(x), v.size()-1@\red)@;
     }
-    z apply(z n, U u, z rangesize) {
-        return set(@\green{n, }@{N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
+    z apply(z n, U u, z s) {
+        return set(@\green{n, }@{N.l, N.r, app(N.agg, u, s), comp(u, N.lazy)});
     }
 	z update(z a, z bex, z l, z rex, z n, U u, U lazy) {
 		if(bex <= l || rex <= a) return apply(n, lazy, rex - l);
@@ -31,7 +31,7 @@ struct segT { @\warn{bei persistent vorm Abschreiben memory berechnen!}@
 		z m = (l+rex)/2;
 		z nl = update(a, bex, l, m, N.l, u, comp(lazy, N.lazy));
 		z nr = update(a, bex, m, rex, N.r, u, comp(lazy, N.lazy));
-		return set(@\green{n, }@{nl, nr, aggr(v[nl].agg, v[nr].agg)});
+		return set(@\green{n, }@{nl, nr, aggr(v[nl].agg, v[nr].agg), id});
 	}
     A query(z a, z bex, z l, z rex, z n) {
         if(bex <= l || rex <= a) return e;
@@ -60,7 +60,7 @@ struct segT { @\warn{bei persistent vorm Abschreiben memory berechnen!}@
     @\green{void}\yellow{segT}@ update(z l, z rex, U u) {
         @\opt{assert(0 <= l && l <= rex && rex <= sz);}@
         @\green{root = update(l, rex, 0, sz, root, u);}@
-        @\yellow{return segT{sz, e, id, v, update(l, rex, 0, sz, root, u)};}@
+        @\yellow{return segT{sz, e, id, v, update(l, rex, 0, sz, root, u, id)};}@
     }
 
     A query(z l, z rex) {

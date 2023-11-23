@@ -1,36 +1,36 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define int long long
-
-using z = int;
-using vz = vector<z>;
-using vvz = vector<vz>;
-using pzz = pair<z, z>;
-using vpzz = vector<pzz>;
-using vvpzz = vector<vpzz>;
-using vb = vector<bool>;
-z INF = 1e18;
-
-#define au auto&&
-#define fe(x...) for(au x)
-
-#define in(x...) x; [](au... a){((cin>>a), ...);}(x);
-#define inv(v, n) v(n); fe(_:v){in(_)}
-
-
+#include "../template/template_compiling.cpp"
 
 template<bool persistent=0>
 struct segT {
     z sz; //always initialize!
 
-    using A = z;
-    using U = z;
-    A e = 0;
-    U id = 0;
-    A aggr(A a, A b) {return a+b;}
-    A app(A a, U u, z s) {return a+u*s;}
-    U comp(U later, U first) {return later+first;}
+ 	/*//main0:
+	using A = z;
+	using U = z;
+	A e = INF;
+	U id = -1;
+	A aggr(A a, A b) {return min(a, b);}
+    A app(A a, U u, z s) {return u!=id ? u : a;}
+    U comp(U later, U first) {return later!=id ? later : first;}*/
+
+	/*//main1:
+	using A = z;
+	using U = z;
+	A e = 0;
+	U id = 0;
+	A aggr(A a, A b) {return a+b;}
+	A app(A a, U u, z s) {return a+u*s;}
+	U comp(U later, U first) {return later+first;}*/
+
+	/*//main2:
+	using A = z;
+	using U = pzz;
+	z M = 998244353;
+	A e = 0;
+	U id = {1,0};
+	A aggr(A a, A b) {return (a+b)%M;}
+	A app(A a, U u, z s) {return (u.first*a + u.second*s)%M;}
+	U comp(U later, U first) {return {(later.first*first.first)%M, (later.first*first.second + later.second)%M};}*/
 
     struct node {
         int32_t l, r;
@@ -46,8 +46,8 @@ struct segT {
     z set(z n, node x) {
         return persistent || !n ? v.push_back(x), v.size()-1 : (v[n]=x, n);
     }
-    z apply(z n, U u, z rangesize) {
-        return set(n, {N.l, N.r, app(N.agg, u, rangesize), comp(u, N.lazy)});
+    z apply(z n, U u, z s) {
+        return set(n, {N.l, N.r, app(N.agg, u, s), comp(u, N.lazy)});
     }
 	/*old version (if persistent: 1/3 more memory. TODO: Delete when tested)
     z update(z a, z bex, z l, z rex, z n, U u) {
@@ -56,7 +56,7 @@ struct segT {
         z m = (l + rex) / 2;
         z nl = update(a, bex, l, m, apply(N.l, N.lazy, m - l), u); //here, it's important that v[0] is an empty node
         z nr = update(a, bex, m, rex, apply(N.r, N.lazy, rex - m), u);
-        return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg)});
+        return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg), id});
     }*/
 	z update(z a, z bex, z l, z rex, z n, U u, U lazy) { //TODO: make update and apply return nodes (that need to be pushed into v manually, if desired)!!?
 		if (bex <= l || rex <= a) return apply(n,lazy,rex-l);
@@ -64,7 +64,7 @@ struct segT {
 		z m = (l+rex)/2;
 		z nl = update(a, bex, l, m, N.l, u, comp(lazy, N.lazy)); //here, it's important that v[0] is an empty node
 		z nr = update(a, bex, m, rex, N.r, u, comp(lazy, N.lazy));
-		return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg)});
+		return set(n, {nl, nr, aggr(v[nl].agg, v[nr].agg), id});
 	}
     A query(z a, z bex, z l, z rex, z n) {
         if(bex <= l || rex <= a) return e;
@@ -95,7 +95,7 @@ struct segT {
     segT update(z l, z rex, U u) {
         assert(0 <= l && l <= rex && rex <= sz);
         segT t = *this;
-        t.root = update(l, rex, 0, sz, root, u);
+        t.root = update(l, rex, 0, sz, root, u, id);
         if(!persistent) root = t.root;
         return t;
     }
@@ -113,5 +113,60 @@ struct segT {
         return lower_bound(l, rex, 0, sz, root, curr_agg, id, p, rtl) + !rtl;
 }};
 
+/*
+int32_t main0() { // https://judge.yosupo.jp/problem/segment_add_get_min
+	z in(n,q)
+	segT<0> t{n};
+	for (int i = 0; i < n; ++i) {
+		z in(a)
+		t.update(i,i+1,a);
+	}
+	for (int i = 0; i < q; ++i) {
+		z in(l,rex)
+		pr+t.query(l,rex);
+	}
+}*/
 
-// TODO: test
+/*int32_t main1() { // https://judge.yosupo.jp/problem/point_add_range_sum
+	z in(n,q)
+	segT<0> t{n};
+	for (int i = 0; i < n; ++i) {
+		z in(a)
+		t.update(i,i+1,a);
+	}
+	for (int i = 0; i < q; ++i) {
+		z in(m)
+		if(m==0) {
+			z in(p,x)
+			t.update(p,p+1,x);
+		}
+		else {
+			z in(l,rex)
+			pr+t.query(l,rex);
+		}
+	}
+}*/
+
+/*int32_t main2() { // https://judge.yosupo.jp/problem/range_affine_range_sum
+	z in(n,q)
+	segT<0> t{n};
+	for (int i = 0; i < n; ++i) {
+		z in(a)
+		t.update(i,i+1, {0, a});
+	}
+	for (int i = 0; i < q; ++i) {
+		z in(m)
+		if(m==0) {
+			z in(l,rex,b,c)
+			t.update(l,rex,{b,c});
+		}
+		else {
+			z in(i)
+			pr+t.query(i,i+1);
+		}
+	}
+}*/
+
+//TODO: test persistency (e.g. with SWERC task  --  when CF is available again)
+
+//TODO: test lower_bound
