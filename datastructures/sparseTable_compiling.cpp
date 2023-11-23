@@ -15,7 +15,7 @@ z INF = 1e18;
 #define au auto&&
 #define fe(x...) for(au x)
 
-#define in(x...) x; [](au... a){(cin>>a, ...);}(x);
+#define in(x...) x; [](au... a){((cin>>a), ...);}(x);
 #define inv(v, n) v(n); fe(_:v){in(_)}
 
 
