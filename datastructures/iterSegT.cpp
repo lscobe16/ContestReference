@@ -13,7 +13,7 @@ struct iterSegT {
             @\green{v[i] = agg(v[2 * i], v[2 * i + 1]);}@
     }
 
-    @\greenBox{Point set, Range mark}@
+    @\greenBox{Point set, Range query}@
     void set(z i, A a) {
         v[i += n] = a;
         while (i /= 2) v[i] = agg(v[2 * i], v[2 * i + 1]);
