@@ -10,8 +10,9 @@ bool compX(pt a, pt b) {
 	return pair{real(a), imag(a)} < pair{real(b), imag(b)};
 }
 
-constexpr double PIU = acos(-1.0l); // PIL < PI < PIU
-constexpr double PIL = PIU-2e-19l;
+double PIU = acos(-1.0l); // PIL < PI < PIU
+double PIL = PIU-2e-19l;
+double EPS = 1e-8; // for example
 
 // Winkel zwischen Punkt und x-Achse in [-PI, PI].
 double angle(pt a) {return arg(a);}
@@ -22,12 +23,14 @@ pt rotate(pt a, double theta) {return a * polar(1.0, theta);}
 // Skalarprodukt.
 double dot(pt a, pt b) {return real(conj(a) * b);}
 
-// faster norm, (euclidean norm)^
+// faster norm, (euclidean norm)^2
 double norm(pt a) {return dot(a, a);}
 
-// Kreuzprodukt, 0, falls kollinear.
+// Kreuzprodukt, aufgespannte Fläche mit Vorzeichen 
 double cross(pt a, pt b) {return imag(conj(a) * b);}
 double cross(pt p, pt a, pt b) {return cross(a - p, b - p);}
+// integer: counter-clockwise ; use >= for true on colinear
+bool ccw(pt a, pt b, pt c) {return cross(a, b, c) > 0;}
 
 //  1 => c links von a->b
 //  0 => a, b und c kollinear
@@ -42,9 +45,17 @@ bool isCoplanar(pt a, pt b, pt c, pt d) {
 	return abs((b - a) * (c - a) * (d - a)) < EPS;
 }
 
-// identifiziert Winkel zwischen Vektoren u und v
-pt uniqueAngle(pt u, pt v) {
+// charakterisiert Winkel zwischen Vektoren u und v
+pt uniqueAngle(pt u, pt v) { // O(log)
 	pt tmp = v * conj(u);
 	ll g = abs(gcd(real(tmp), imag(tmp)));
 	return tmp / g;
+}
+
+void sortAround(pt p, vpt& ps) {
+	sort(ps.begin(), ps.end(), [&](au a, au b){
+		if (compX(a, p) != compX(b, p)) 
+			return compX(a, p) > compX(b, p);
+		return cross(p, a, b) > 0;
+	});
 }

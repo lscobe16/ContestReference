@@ -1,17 +1,17 @@
-// Flächeninhalt eines Polygons (nicht selbstschneidend).
+// Flächeninhalt eines Polygons (nicht selbstschneidend), O(n)
 // Punkte gegen den Uhrzeigersinn: positiv, sonst negativ.
 double area(const vector<pt>& poly) { //poly[0] == poly.back()
 	double res = 0;
-	for (int i = 0; i + 1 < sz(poly); i++)
+	for (int i = 0; i + 1 < poly.size(); i++)
 		res += cross(poly[i], poly[i + 1]);
 	return 0.5 * res;
 }
 
-// Anzahl drehungen einer Polyline um einen Punkt
+// Anzahl Drehungen einer Polyline um einen Punkt
 // p nicht auf rand und poly[0] == poly.back()
 // res != 0 or (res & 1) != 0 um inside zu prüfen bei
-// selbstschneidenden Polygonen (definitions Sache)
-ll windingNumber(pt p, const vector<pt>& poly) {
+// selbstschneidenden Polygonen (Definitionssache)
+ll windingNumber(pt p, const vector<pt>& poly) { // O(n)
 	ll res = 0;
 	for (int i = 0; i + 1 < sz(poly); i++) {
 		pt a = poly[i], b = poly[i + 1];
@@ -25,7 +25,7 @@ ll windingNumber(pt p, const vector<pt>& poly) {
 
 // Testet, ob ein Punkt im Polygon liegt (beliebige Polygone).
 // Ändere Zeile 32 falls rand zählt, poly[0] == poly.back()
-bool inside(pt p, const vector<pt>& poly) {
+bool inside(pt p, const vector<pt>& poly) { // O(n)
 	bool in = false;
 	for (int i = 0; i + 1 < sz(poly); i++) {
 		pt a = poly[i], b = poly[i + 1];
@@ -40,7 +40,7 @@ bool inside(pt p, const vector<pt>& poly) {
 
 // convex hull without duplicates, h[0] != h.back()
 // apply comments if border counts as inside
-bool inside(pt p, const vector<pt>& hull) {
+bool inside(pt p, const vector<pt>& hull) { // O(log n)
 	int l = 0, r = sz(hull) - 1;
 	if (cross(hull[0], hull[r], p) >= 0) return false; // > 0
 	while (l + 1 < r) {
@@ -52,14 +52,12 @@ bool inside(pt p, const vector<pt>& hull) {
 }
 
 void rotateMin(vector<pt>& hull) {
-	auto mi = min_element(all(hull), [](const pt& a, const pt& b){
-		return real(a) == real(b) ? imag(a) < imag(b)
-		                          : real(a) < real(b);
-	});
+	auto mi = min_element(hull.begin(), hull.end(), compX);
 	rotate(hull.begin(), mi, hull.end());
 }
 
 // convex hulls without duplicates, h[0] != h.back()
+// point wise sum of two convex polygons  // O(n+m)
 vector<pt> minkowski(vector<pt> ps, vector<pt> qs) {
 	rotateMin(ps);
 	rotateMin(qs);
@@ -77,7 +75,7 @@ vector<pt> minkowski(vector<pt> ps, vector<pt> qs) {
 	return res;
 }
 
-// convex hulls without duplicates, h[0] != h.back()
+// convex hulls without duplicates, h[0] != h.back()  // O(n+m)
 double dist(const vector<pt>& ps, const vector<pt>& qs) {
 	for (pt& q : qs) q *= -1;
 	auto p = minkowski(ps, qs);
@@ -93,11 +91,10 @@ double dist(const vector<pt>& ps, const vector<pt>& qs) {
 
 bool left(pt of, pt p) {return cross(p, of) < 0 ||
                        (cross(p, of) == 0 && dot(p, of) > 0);}
-
 // convex hulls without duplicates, hull[0] == hull.back() and
-// hull[0] must be a convex point (with angle < pi)
+// hull[0] must be a convex point (with inner angle < pi)
 // returns index of corner where dot(dir, corner) is maximized
-int extremal(const vector<pt>& hull, pt dir) {
+int extremal(const vector<pt>& hull, pt dir) { // O(log n)
 	dir *= pt(0, 1);
 	int l = 0, r = sz(hull) - 1;
 	while (l + 1 < r) {
@@ -114,13 +111,14 @@ int extremal(const vector<pt>& hull, pt dir) {
 	return r;
 }
 
-// convex hulls without duplicates, hull[0] == hull.back() and
-// hull[0] must be a convex point (with angle < pi)
+// convex hull without duplicates, hull[0] == hull.back() and
+// hull[0] must be a convex point (with inner angle < pi)
+// intersection of a polygon and a line
 // {} if no intersection
 // {x} if corner is only intersection
 // {a, b} segments (a,a+1) and (b,b+1) intersected (if only the
 // border is intersected corners a and b are the start and end)
-vector<int> intersect(const vector<pt>& hull, pt a, pt b) {
+vector<int> intersect(const vector<pt>& hull, pt a, pt b) { // O(log n)
 	int endA = extremal(hull, (a-b) * pt(0, 1));
 	int endB = extremal(hull, (b-a) * pt(0, 1));
 	// cross == 0 => line only intersects border

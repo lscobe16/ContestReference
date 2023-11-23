@@ -1,33 +1,27 @@
-struct line {
-	double a, b, c; // ax + by + c = 0; vertikale Line: b = 0, sonst: b = 1
-	line(pt p, pt q) : a(-imag(q-p)), b(real(q-p)), c(cross({b, -a},p)) {}
-};
-
-line pointsToLine(pt p1, pt p2) {
-	line l;
-	if (abs(real(p1 - p2)) < EPS) {
-		l.a = 1; l.b = 0.0; l.c = -real(p1);
-	} else {
-		l.a = -imag(p1 - p2) / real(p1 - p2);
-		l.b = 1.0;
-		l.c = -(l.a * real(p1)) - imag(p1);
-	}
-	return l;
+// Entfernung von Punkt p zur Geraden durch a-b. 2d und 3d
+double distToLine(pt a, pt b, pt p) {
+	return abs(cross(p - a, b - a)) / abs(b - a);
 }
 
-bool parallel(line l1, line l2) {
-	return (abs(l1.a - l2.a) < EPS) && (abs(l1.b - l2.b) < EPS);
+// Projiziert p auf die Gerade a-b
+pt projectToLine(pt a, pt b, pt p) {
+	return a + (b - a) * dot(p - a, b - a) / norm(b - a);
 }
 
-bool same(line l1, line l2) {
-	return parallel(l1, l2) && (abs(l1.c - l2.c) < EPS);
+// Liegt p auf der Geraden a-b? 2d und 3d
+bool pointOnLine(pt a, pt b, pt p) {
+	return cross(a, b, p) == 0;
 }
 
-bool intersect(line l1, line l2, pt& p) {
-	if (parallel(l1, l2)) return false;
-	double y, x = (l2.b * l1.c - l1.b * l2.c) / (l2.a * l1.b - l1.a * l2.b);
-	if (abs(l1.b) > EPS) y = -(l1.a * x + l1.c);
-	else y = -(l2.a * x + l2.c);
-	p = {x, y};
-	return true;
+// Test auf Schnitt der Geraden a-b und c-d <=> nicht parallel
+bool lineIntersection(pt a, pt b, pt c, pt d) {
+	return abs(cross(a - b, c - d)) < EPS;
+}
+
+// Berechnet den Schnittpunkt der Geraden p0-p1 und p2-p3.
+// die Geraden dürfen nicht parallel sein!
+pt lineIntersection(pt p0, pt p1, pt p2, pt p3) {
+	double a = cross(p1 - p0, p3 - p2);
+	double b = cross(p2 - p0, p3 - p2);
+	return {p0 + b/a*(p1 - p0)};
 }

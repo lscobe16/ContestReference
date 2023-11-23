@@ -1,5 +1,5 @@
 vvz adj; // @\redBox{store graph! no yellow -> DAG only!}@
-z f = 0, n;
+z f, n; // no (re)init necessary
 vz fin, topo; // topo: edges go from left to right
 
 void dfs(z u) {
@@ -11,7 +11,7 @@ void dfs(z u) {
 
 void@\yellow{bool}@ topoSort() {
 	topo = fin = vz(n = adj.size());
-	for (z v = 0; v < n; v++) if (!fin[v]) dfs(v);
+	for (z v=f=0; v < n; v++) if (!fin[v]) dfs(v);
 	@\yellow{if (f != n) return false;}@
 	for (z v = 0; v < n; v++) topo[n-fin[v]] = v;
 	@\yellow{return true;}@ // iff adj is DAG iff topo is valid
