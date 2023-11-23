@@ -20,7 +20,7 @@ using vvld = vector<vld>;
 #define fe(x...) for(au x)
 
 // Usage: z in(n, m)    and    vz inv(a, n)
-#define in(x...) x; [](au... a){cin>>...>>a;}(x);
+#define in(x...) x; [](au... a){((cin>>a), ...);}(x);
 #define inv(v, n) v(n); fe(_:v){in(_)}
 
 au pr = cout;
