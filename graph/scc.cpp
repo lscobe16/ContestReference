@@ -1,7 +1,7 @@
 vvz adj, sccs;
 z counter, sccCounter;
 vb inStack;
-vz low, idx, S; // idx: v -> scc(v)  @\red{or -1, if v in none}@
+vz low, idx, S; // idx: v -> scc(v)  @\redBox{or -1, if v in none}@
 
 void visit(z v) {
 	z old = low[v] = counter++;
