@@ -259,12 +259,14 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 	\sourcecode{math/transforms/fftMul.cpp}
 \end{algorithm}
 
-\subsection{LGS über $\boldsymbol{\mathbb{R}}$}
-\method{gauss}{löst LGS}{n^3}
+\subsection{LGS und Matrix invertieren über $\boldsymbol{\mathbb{R}}$}
+\method{gauss}{gaußt die Matrix in eine obere Dreicksmatrix mit 1 auf Diagonale}{n^3}
+\method{invert}{invertiert eine quadratische Matrix in-place}{n^3}
+Die Checks sind nicht notwendig, wenn bekannt ist, dass die Matrix vollen Rang hat.
 \sourcecode{math/gauss.cpp}
 
-\subsection{LGS über $\boldsymbol{\mathbb{F}_p}$}
-\method{gauss}{löst LGS}{n^3}
+\subsection{LGS und Matrix invertieren über $\boldsymbol{\mathbb{F}_p}$}
+\method{gauss}{gaußt die Matrix in eine obere Dreicksmatrix mit 1 auf Diagonale}{n^3}
 \sourcecode{math/lgsFp.cpp}
 
 \clearpage
