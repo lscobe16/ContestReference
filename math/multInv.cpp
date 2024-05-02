@@ -1,5 +1,3 @@
-ll multInv(ll n, ll p) {
-	ll x, y;
-	extendedEuclid(n, p, x, y); // Implementierung von oben.
-	return ((x % p) + p) % p;
+ll multInv(ll x, ll m) { // x^{-1} mod m
+    return 1 < x ? m - multInv(m % x, x) * m / x : 1;
 }
