@@ -14,5 +14,4 @@ struct persistent {
 		time += 2;
 		data.push_back({time, value});
 		return time;
-	}
-};
+}};

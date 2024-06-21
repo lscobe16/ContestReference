@@ -20,5 +20,4 @@ struct persistentArray {
 			mods.pop_back();
 		}
 		time = t;
-	}
-};
+}};
