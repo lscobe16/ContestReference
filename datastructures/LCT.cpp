@@ -174,5 +174,4 @@ struct LCT {
 		makeRoot(from);
 		expose(to);
 		to->delta = joinDeltas(to->delta, delta);
-	}
-};
+}};

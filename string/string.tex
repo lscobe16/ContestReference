@@ -42,7 +42,7 @@
 
 \begin{algorithm}{\textsc{Manacher}'s Algorithm, Longest Palindrome}
 	\begin{methods}
-		\method{manacher}{Längen der Palindrome mit Zentrum bei Buchstaben i/2 und in der Lücke danach}{n}
+		\method{manacher}{Längen der Palindrome mit Zentrum bei Buchstaben i/2 \\ und in der Lücke danach}{n}
 	\end{methods}
 	\sourcecode{string/manacher.cpp}
 \end{algorithm}
@@ -54,7 +54,6 @@
 	\sourcecode{string/longestCommonSubsequence.cpp}
 \end{algorithm}
 
-\columnbreak
 \begin{algorithm}{\textsc{Aho-Corasick}-Automat}
 	\begin{methods}[ll]
 		sucht patterns im Text & \runtime{\abs{Text}+\sum\abs{pattern}}
@@ -68,8 +67,8 @@
 	\end{enumerate}
 	\sourcecode{string/ahoCorasick.cpp}
 \end{algorithm}
-\clearpage
 
+\vspace*{-1em}
 \begin{algorithm}[optional]{Lyndon}
 	\begin{itemize}
 		\item \textbf{Lyndon-Wort:} Ein Wort das lexikographisch kleiner ist als jede seiner Rotationen.

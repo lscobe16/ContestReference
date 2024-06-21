@@ -23,9 +23,8 @@ struct AhoCorasick {
 	}
 
 	int getSuffix(int v) {
-		if (aho[v].suffix < 0) {
+		if (aho[v].suffix < 0)
 			aho[v].suffix = go(getSuffix(-aho[v].suffix), aho[v].ch);
-		}
 		return aho[v].suffix;
 	}
 
@@ -48,5 +47,4 @@ struct AhoCorasick {
 			//dp[u] = dp[v] + aho[u].cnt; // pattern count
 			dfs(u);
 			dp[v] += dp[u]; // no of matches
-	}}
-};
+}}};
