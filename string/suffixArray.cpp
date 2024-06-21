@@ -1,35 +1,38 @@
+constexpr int MAX_CHAR = 256;
 struct SuffixArray {
-	z n, step, count; // SA[i] = start index of i-smallest suffix
-	vz SA, LCP; // LCP[i] = lcp(SA[i - 1], SA[i])
-	vvz P;
-	vector<pair<pair<z, z>, z>> L;
+	int n;
+	vector<int> SA, LCP;
+	vector<vector<int>> P;
 
-	SuffixArray(string& s) : n(s.size()), SA(n), LCP(n), L(n) {
-		P = vvz(__lg(n)+2, vz(n));
-		for (z i = 0; i < n; i++) P[0][i] = s[i];
-		for (step = 1, count = 1; count < n; step++, count *= 2) {
-			for (z i = 0; i < n; i++)
-				L[i] = {{P[step-1][i],
-				         i+count < n ? P[step-1][i+count] : -1}, i};
-			sort(L.begin(), L.end());
-			for (z i = 0; i < n; i++) {
-				P[step][L[i].second] =
-					i > 0 && L[i].first == L[i-1].first ?
-					P[step][L[i-1].second] : i;
+	SuffixArray(const string& s) : n(sz(s)), SA(n), LCP(n),
+		P(__lg(2 * n - 1) + 1, vector<int>(n)) {
+		P[0].assign(all(s));
+		iota(all(SA), 0);
+		sort(all(SA), [&](int a, int b) {return s[a] < s[b];});
+		vector<int> x(n);
+		for (int k = 1, c = 1; c < n; k++, c *= 2) {
+			iota(all(x), n - c);
+			for (int ptr = c; int i : SA) if (i >= c) x[ptr++] = i - c;
+
+			vector<int> cnt(k == 1 ? MAX_CHAR : n);
+			for (int i : P[k-1]) cnt[i]++;
+			partial_sum(all(cnt), begin(cnt));
+			for (int i : x | views::reverse) SA[--cnt[P[k-1][i]]] = i;
+
+			auto p = [&](int i) {return i < n ? P[k-1][i] : -1;};
+			for (int i = 1; i < n; i++) {
+				int a = SA[i-1], b = SA[i];
+				P[k][b] = P[k][a] + (p(a) != p(b) || p(a+c) != p(b+c));
 		}}
-		for (z i = 0; i < n; i++) SA[i] = L[i].second;
-		for (z i = 1; i < n; i++) LCP[i] = lcp(SA[i - 1], SA[i]);
+		for (int i = 1; i < n; i++) LCP[i] = lcp(SA[i-1], SA[i]);
 	}
 
-	z lcp(z x, z y) { // x and y are text-indices, not SA
-		z ret = 0;
+	int lcp(int x, int y) {//x & y are text-indices, not SA-indices
 		if (x == y) return n - x;
-		for (z k = step - 1; k >= 0 && x < n && y < n; k--) {
-			if (P[k][x] == P[k][y]) {
-				x += 1 << k;
-				y += 1 << k;
-				ret += 1 << k;
-		}}
-		return ret;
+		int res = 0;
+		for (int i = sz(P) - 1; i >= 0 && max(x, y) + res < n; i--) {
+			if (P[i][x + res] == P[i][y + res]) res |= 1 << i;
+		}
+		return res;
 	}
 };

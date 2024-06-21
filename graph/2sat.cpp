@@ -21,18 +21,14 @@ struct sat2 {
 	@\opt{void addAnd(z a, z b)   {addTrue(a); addTrue(b);}}@
 	@\opt{void addNand(z a, z b)  {addOr(1^a, 1^b);}}@
 
-	bool solvable() {
-		scc();
-		for (z i = 0; i < n; i += 2) {
+	bool solve() {
+		scc(); //scc code von oben
+		sol.assign(n, -1);
+		for (int i = 0; i < n; i += 2) {
 			if (idx[i] == idx[i + 1]) return false;
+			sol[i] = idx[i] < idx[i + 1];
+			sol[i + 1] = !sol[i];
 		}
-		sol = vz(n, -1);
-		for (z i = 0; i < sccCounter; i++) {
-			if (sol[sccs[i][0]] == -1) {
-				for (z v : sccs[i]) {
-					sol[v] = 1;
-					sol[1^v] = 0;
-		}}}
 		return true;
 	}
 };

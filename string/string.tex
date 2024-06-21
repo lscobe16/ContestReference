@@ -24,7 +24,7 @@
 	$\textbf{P}[$Kollsion bei $\sqrt{M}$ strings$]\approx \frac{1}{2}$ \quad (birthday paradox)\\
 	Für mehr Sicherheit: größeres M, mehrere Hashes (M's)
 	%TODO: dokumentieren, wie das ist, wenn wir nicht uniform randomness annehmen wollen (siehe FAP-Folien)
-	\sourcecode{string/rollingHash.cpp}
+	\sourcecode{string/rollingHash2.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Pattern Matching mit Wildcards}
@@ -42,8 +42,7 @@
 
 \begin{algorithm}{\textsc{Manacher}'s Algorithm, Longest Palindrome}
 	\begin{methods}
-		\method{init}{transformiert \code{string a}}{n}
-		\method{manacher}{berechnet Längen der Palindrome in longest}{n}
+		\method{manacher}{Längen der Palindrome mit Zentrum bei Buchstaben i/2 und in der Lücke danach}{n}
 	\end{methods}
 	\sourcecode{string/manacher.cpp}
 \end{algorithm}
@@ -55,18 +54,21 @@
 	\sourcecode{string/longestCommonSubsequence.cpp}
 \end{algorithm}
 
+\columnbreak
 \begin{algorithm}{\textsc{Aho-Corasick}-Automat}
 	\begin{methods}[ll]
-		sucht patterns im Text & \runtime{\abs{Text}+\sum\abs{pattern}+\abs{matches}}
+		sucht patterns im Text & \runtime{\abs{Text}+\sum\abs{pattern}}
 	\end{methods}
 	\begin{enumerate}
-		\item mit \code{addString(pattern, idx);} Patterns hinzufügen.
+		\item mit \code{addString(pattern, idx)} Patterns hinzufügen.
+        \item rufe \code{buildGraph()} auf
 		\item mit \code{state = go(state, idx)} in nächsten Zustand wechseln.
-		\item mit \code{state = getExit(state)} den exit Kanten folgen bis \code{state == 0}
-		\item dabei mit \code{aho[state].patterns} die Matches zählen
+        \item erhöhe dabei \code{dp[state]++}
+        \item rufe \code{dfs()} auf. In dp[pattern state] stehen die Anzahl der Matches
 	\end{enumerate}
 	\sourcecode{string/ahoCorasick.cpp}
 \end{algorithm}
+\clearpage
 
 \begin{algorithm}[optional]{Lyndon}
 	\begin{itemize}
@@ -97,10 +99,11 @@
 \begin{algorithm}{Suffix-Array}
 \begin{methods}
 	\method{SuffixArray}{berechnet ein Suffix Array}{\abs{s}\*\log^2(\abs{s})}
-	\method{lcp}{berechnet Länge des logest common prefix}{\log(\abs{s})}
+	\method{lcp}{berechnet Länge des longest common prefix}{\log(\abs{s})}
 	\method{}{von \code{s[x]} und \code{s[y]}}{}
 \end{methods}
-\textbf{ACHTUNG:} \code{s} muss mit einem sentinel enden! \code{'\$' <'A' <'a' <'~'}
+\textbf{ACHTUNG:} \code{s} muss mit einem Sentinel enden! \code{'\$' <'A' <'a' <'~'}
+% Vielleicht auch nicht mehr, aber schadet auch nicht. Man kann dadurch auch aussuchen, ob Präfixe kleiner oder größer sind
 \sourcecode{string/suffixArray.cpp}
 \end{algorithm}
 

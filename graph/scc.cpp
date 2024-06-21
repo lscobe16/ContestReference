@@ -1,5 +1,5 @@
 vvz adj, sccs;
-z counter, sccCounter;
+z counter;
 vb inStack;
 vz low, idx, S; // idx: v -> scc(v)  @\redBox{or -1, if v in none}@
 
@@ -14,14 +14,11 @@ void visit(z v) {
 
 	if (old == low[v]) {
 		sccs.push_back({});
-		z u;
-		do {
+		for (z u = -1; u != v;) {
 			u = S.back(); S.pop_back(); inStack[u] = false;
-			idx[u] = sccCounter;
-			sccs[sccCounter].push_back(u);
-		} while (u != v);
-		sccCounter++;
-}}
+			idx[u] = sccs.size() - 1;
+			sccs.back().push_back(u);
+}}}
 
 void scc() {
 	z n = adj.size();
@@ -30,7 +27,7 @@ void scc() {
 	idx = vz(n, -1);
 	sccs.clear();
 
-	counter = sccCounter = 0;
-	for (z i = 0; i < n; i++) {
+	counter = 0;
+	for (int i = 0; i < sz(adj); i++) {
 		if (low[i] < 0) visit(i);
 }}

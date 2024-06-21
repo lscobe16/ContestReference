@@ -10,7 +10,7 @@ bool isPrime(z n) {
 		z v = modpow(a, d, n);
 		if (v == 1 || v == n - 1) continue;
 		for (z i = 1; i <= j; i++) {
-			v = modmul(v, v, n);
+			v = ((__int128)v * v) % n;
 			if (v == n - 1 || v <= 1) break;
 		}
 		if (v != n - 1) return false;

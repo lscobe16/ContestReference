@@ -1,5 +1,5 @@
-// Setzt das deutsche Tastaturlayout.
-setxkbmap de
+// Setzt deutsche Tastaturlayout / toggle mit alt + space
+setxkbmap de,us -option grp:alt_space_toggle
 
 // Set mit eigener Sortierfunktion.
 set<point2, decltype(comp)> set1(comp);
