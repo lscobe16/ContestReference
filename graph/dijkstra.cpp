@@ -16,6 +16,6 @@
 	return @\greenE{\{}@dist@\greenE{, prev\}}@;
 }
 
-@\green{vz path = {t}; z c = t;}@
-@\green{while (c != s) path.push_back(c = prev[c]);}@
+@\green{vz path = {t};}@
+@\green{while (c.back() != s) path.push_back(prev[c.back()]);}@
 @\green{reverse(path.begin(), path.end());}@

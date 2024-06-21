@@ -96,7 +96,7 @@
 \method{bellmanFord}{kürzeste Pfade oder negative Kreise finden}{\abs{V}\*\abs{E}}
 \sourcecode{graph/bellmannFord.cpp}
 
-\subsubsection{Algorithmus von \textsc{Dijkstra}}
+\subsubsection{\textsc{Dijkstra}-Algorithmus}
 \method{dijkstra}{kürzeste Pfade in Graphen ohne negative Kanten}{\abs{E}\*\log(\abs{V})}
 \sourcecode{graph/dijkstra.cpp}
 
@@ -232,6 +232,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\sourcecode{graph/hopcroftKarp.cpp}
 \end{algorithm}
 
+\columnbreak
 \begin{algorithm}{Global Mincut}
 	\begin{methods}
 		\method{stoer\_wagner}{berechnet globalen Mincut}{\abs{V}\abs{E}+\abs{V}^2\*\log(\abs{E})}
@@ -282,7 +283,6 @@ $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{V}})$.
 Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 \sourcecode{graph/dinicScaling.cpp}
 \vfill*
-\columnbreak
 
 \begin{algorithm}{Min-Cost-Max-Flow}
 	\begin{methods}
@@ -335,7 +335,6 @@ Alle Kanten haben Kapazität 1 $\Rightarrow$ $\O(\abs{E}\cdot\sqrt{\abs{E}})$
 	\sourcecode{graph/maxWeightBipartiteMatching.cpp}
 \end{algorithm}
 \vfill*
-\columnbreak
 
 
 \begin{algorithm}[optional]{TSP}
