@@ -343,6 +343,16 @@
 	\item Indizes/eine Variable schwierig? $\Rightarrow$ klare Definition in Kommentar schreiben
 \end{itemize}
 
+\subsection{ATIS VS Code}
+
+Die C/C++ Extension frisst Speicher, den die ATIS nicht gönnt.
+\begin{itemize}
+	\item C/C++ Extension installieren (nicht Pack)
+	\item In VS Code Einstellungen nach \code{cache} suchen
+	\item Einstellung \code{C_Cpp: Intelli Sense Cache Size} auf $128$ stellen (oder zumindest $\leq 512$)
+	\item Wenn schon akut: Ordner \codeSafe{~/.cache/vscode-cpptools} löschen (existiert erst wenn man mit Extension gearbeitet hat)
+\end{itemize}
+
 \columnbreak
 \subsection{Strategie}
 
