@@ -16,7 +16,7 @@ struct union_find { @\yellowBox{without}\greenBox{rollback}@
         e[b] = a;
     }
 
-    bool same(z a, z b) {return find(a) == find(b);}
+    @\opt{bool same(z a, z b) {return find(a) == find(b);}}@
 
     @\opt{z sz(z a) {return -e[find(a)];}}@
 
