@@ -65,12 +65,10 @@
 \begin{algorithm}{Union-Find}
 	\begin{methods}
 		\method{init}{legt $n$ einzelne Mengen an}{n}
-		\method{find}{findet den Repräsentanten}{\alpha(n)}
-		\method{unite}{vereint 2 Mengen}{\alpha(n)}
-		\method{\green{rollback}}{setzt Zustand zurück auf den mit time()=$t$}{1}
+		\method[amort. $\O(\alpha(n))$]{find}{findet den Repräsentanten}{}
+		\method[amort. $\O(\alpha(n))$]{unite}{vereint 2 Mengen}{}
+		\method[amort. $\O(1)$]{\green{rollback}}{setzt Zustand zurück auf den mit time()=$t$}{}
 	\end{methods}
-
-	Laufzeiten sind amortisiert.
 
 	\green{Mit rollback: union + find nur noch in O(log(n)).}
 	\sourcecode{datastructures/unionFind.cpp}
