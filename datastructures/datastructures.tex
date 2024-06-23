@@ -21,10 +21,10 @@
 
 \begin{algorithm}{Fenwick Tree}
 	\begin{methods}
-		\method{init}{baut den Baum auf}{n\*\log(n)}
-		\method{prefix\_sum}{summe von [0, i]}{\log(n)}
-		\method{update}{addiert ein Delta zu einem Element}{\log(n)}
+		\method{add}{addiert ein Delta zu einem Element}{\log(n)}
+		\method{prefix\_sum}{Summe von [0, i)}{\log(n)}
 	\end{methods}
+	Grün: Werte strahlen exponentiell (\code{pot}) nach rechts aus.
 	\sourcecode{datastructures/fenwickTree.cpp}
 	
 	\begin{methods}
