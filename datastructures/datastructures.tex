@@ -63,12 +63,16 @@
 
 \columnbreak
 \begin{algorithm}{Union-Find}
-	\begin{methods} %TODO update, including time complexity
-		\method{init}{legt $n$ einzelne Unions an}{n}
-		\method{findSet}{findet den Repräsentanten}{\log(n)}
-		\method{unionSets}{vereint 2 Mengen}{\log(n)}
-		\method{m\*findSet + n\*unionSets}{Folge von Befehlen}{n+m\*\alpha(n)}
+	\begin{methods}
+		\method{init}{legt $n$ einzelne Mengen an}{n}
+		\method{find}{findet den Repräsentanten}{\alpha(n)}
+		\method{unite}{vereint 2 Mengen}{1}
+		\method{\green{rollback}}{setzt Zustand zurück auf den mit time()=$t$}{1}
 	\end{methods}
+
+	Laufzeiten sind amortisiert.
+
+	\green{Mit rollback: find nur noch in O(log(n)).}
 	\sourcecode{datastructures/unionFind.cpp}
 \end{algorithm}
 

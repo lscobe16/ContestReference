@@ -1,4 +1,4 @@
-struct union_find { @\yellowBox{without}\greenBox{rollback} (-> all only O(log n))@
+struct union_find { @\yellowBox{without}\greenBox{rollback}@
     vz e; // <0: -size, >=0: parent
     @\green{vpzz st{};}@
 
