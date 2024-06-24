@@ -52,14 +52,17 @@
 	\sourcecode{datastructures/sparseTable.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Wavelet Tree}
-	\begin{methods}
-		\method{Constructor}{baut den Baum auf}{n\*\log(n)}
-		\method{kth}{sort $[l, r)[k]$}{\log(n)}
-		\method{countSmaller}{Anzahl elemente in $[l, r)$ kleiner als $k$}{\log(n)}
-	\end{methods}
-	\sourcecode{datastructures/waveletTree.cpp}
-\end{algorithm}
+% obsolete? (without range, pbds Trees can do that; persistent segTree can always do the rest)
+\optional{
+	\begin{algorithm}{Wavelet Tree}
+		\begin{methods}
+			\method{Constructor}{baut den Baum auf}{n\*\log(n)}
+			\method{kth}{sort $[l, r)[k]$}{\log(n)}
+			\method{countSmaller}{Anzahl elemente in $[l, r)$ kleiner als $k$}{\log(n)}
+		\end{methods}
+		\sourcecode{datastructures/waveletTree.cpp}
+	\end{algorithm}
+}
 
 \columnbreak
 \begin{algorithm}{Union-Find}
