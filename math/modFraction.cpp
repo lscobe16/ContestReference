@@ -21,7 +21,7 @@ z modpow(z b, z e, z M=MOD) {
 
 struct mz {
     z a;
-    mz(z a = 0) : a((a %= MOD) < 0 ? a+MOD : a) {}
+    mz(z a = 0) : a(a % MOD + MOD * (a < 0)) {}
     mz operator+(mz o) {
         return a + o.a;
     }
